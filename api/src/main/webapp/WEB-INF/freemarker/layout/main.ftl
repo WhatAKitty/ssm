@@ -13,8 +13,8 @@
 [#include "component/header.ftl"]
 </div>
 <div id="easyui-layout-west" data-options="region:'west',title:'菜单',border:false">
-    <div class="easyui-accordion" data-options="border:false,fit:true,selected:true">
-        [#include "component/menu.ftl"]
+    <div id="aaa" class="easyui-accordion" data-options="border:false,fit:true,selected:true">
+    ${menu}
     </div>
 </div>
 <div data-options="region:'center'" style="padding-top:2px;">

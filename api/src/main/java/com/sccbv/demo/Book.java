@@ -2,6 +2,7 @@ package com.sccbv.demo;
 
 import com.whatakitty.ssm.db.mybatis.SDelEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Book extends SDelEntity {
 
     /**
