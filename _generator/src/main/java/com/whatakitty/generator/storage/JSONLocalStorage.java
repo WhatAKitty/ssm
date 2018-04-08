@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Map;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,8 @@ public class JSONLocalStorage extends BaseLocalStorage {
      *
      * @param path 本地存储路径
      */
-    protected JSONLocalStorage(@Value("${localStorage}") String path) {
+    @Autowired
+    public JSONLocalStorage(@Value("${localStorage}") String path) {
         super(path);
     }
 

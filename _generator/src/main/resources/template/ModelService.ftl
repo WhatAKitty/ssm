@@ -1,7 +1,7 @@
 package ${packageName}.${moduleName}.${uncapitalizedClassName};
 
-import com.gnet.business.asserts.Asserts;
-import com.gnet.business.service.BusinessService;
+import com.whatakitty.ssm.asserts.Asserts;
+import com.whatakitty.ssm.service.BusinessService;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import tk.mybatis.mapper.entity.Example;

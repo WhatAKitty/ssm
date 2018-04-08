@@ -1,10 +1,10 @@
 package ${packageName}.${moduleName}.${uncapitalizedClassName};
 
-import com.gnet.commons.wrapper.RestWrapper;
-import io.swagger.annotations.*;
-import org.springframework.data.domain.Pageable;
+import com.whatakitty.ssm.dto.Pageable;
+import com.whatakitty.ssm.wrapper.RestWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.*;
  * @date ${date}
  * @description
  **/
-@Api(value = "${funcName}管理", consumes = "application/json", produces = "application/json", protocols = "http")
-@RestController
-@PreAuthorize("#oauth2.hasAnyScope('server', 'ui')")
-@RequestMapping(path = "/${classNames}")
+@Controller
+@RequestMapping("/${classNames}")
 public class ${className}Controller {
 
+    @Autowired
     private final ${className}Service ${uncapitalizedClassName}Service;
     private final RestWrapper restWrapper;
 
@@ -37,14 +36,8 @@ public class ${className}Controller {
     }
 
 
-    @ApiOperation(value = "search", notes = "查询${funcName}列表")
-    @ApiImplicitParams({
-        @ApiImplicitParam(paramType = "query", name = "${uncapitalizedClassName}DTO", value = "查询参数", dataTypeClass = ${className}DTO.class),
-        @ApiImplicitParam(paramType = "query", name = "isPage", value = "是否分页", defaultValue = "false", dataTypeClass = Boolean.class)
-    })
-    @ApiResponses({
-        @ApiResponse(code = 200, message = "获取${funcName}列表成功", response = ${className}.class, responseContainer = "List")
-    })
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
     public Object search(Pageable pageable,
                          ${className}DTO ${uncapitalizedClassName}DTO,
@@ -53,44 +46,26 @@ public class ${className}Controller {
     }
 
 
-    @ApiOperation(value = "create", notes = "创建${funcName}")
-    @ApiImplicitParam(paramType = "form", name = "${uncapitalizedClassName}DTO", value = "${funcName}数据", dataTypeClass = ${className}DTO.class)
-    @ApiResponses({
-        @ApiResponse(code = 201, message = "创建${funcName}成功", response = ${className}.class),
-        @ApiResponse(code = 500, message = "创建${funcName}失败")
-    })
+    @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(code = HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)
     public Object create(@Validated({${className}DTO.${className}CreateGroup.class}) @RequestBody ${className}DTO ${uncapitalizedClassName}DTO) {
         return restWrapper.wrap(${uncapitalizedClassName}Service.create(${uncapitalizedClassName}DTO));
     }
 
 
-    @ApiOperation(value = "update", notes = "修改${funcName}")
-    @ApiImplicitParams({
-        @ApiImplicitParam(paramType = "body", name = "${uncapitalizedClassName}DTO", value = "${funcName}数据", dataTypeClass = ${className}DTO.class),
-        @ApiImplicitParam(paramType = "path", name = "${uncapitalizedClassName}Id", value = "${funcName}编号", required = true, dataTypeClass = Long.class)
-    })
-    @ApiResponses({
-        @ApiResponse(code = 204, message = "修改${funcName}成功"),
-        @ApiResponse(code = 500, message = "修改${funcName}失败")
-    })
-    @RequestMapping(path = "/{${uncapitalizedClassName}Id}", method = RequestMethod.PUT)
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @ResponseBody
+    @RequestMapping(value = "/{${uncapitalizedClassName}Id}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Object update(@Validated({${className}DTO.${className}UpdateGroup.class}) @RequestBody ${className}DTO ${uncapitalizedClassName}DTO,
                          @PathVariable Long ${uncapitalizedClassName}Id) {
         return restWrapper.wrap(${uncapitalizedClassName}Service.update(${uncapitalizedClassName}Id, ${uncapitalizedClassName}DTO));
     }
 
 
-    @ApiOperation(value = "destroy", notes = "删除${funcName}")
-    @ApiImplicitParam(paramType = "path", name = "${uncapitalizedClassName}Id", value = "${funcName}编号", required = true, dataTypeClass = Long.class)
-    @ApiResponses({
-        @ApiResponse(code = 204, message = "删除${funcName}成功"),
-        @ApiResponse(code = 500, message = "删除${funcName}失败")
-    })
-    @RequestMapping(path = "/{${uncapitalizedClassName}Id}", method = RequestMethod.DELETE)
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @ResponseBody
+    @RequestMapping(value = "/{${uncapitalizedClassName}Id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Object delete(@PathVariable Long ${uncapitalizedClassName}Id) {
         return restWrapper.wrap(${uncapitalizedClassName}Service.destroy(${uncapitalizedClassName}Id));
     }

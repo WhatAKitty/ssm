@@ -1,6 +1,6 @@
 package ${packageName}.${moduleName}.${uncapitalizedClassName};
 
-import com.gnet.commons.db.mybatis.SDelEntity;
+import com.whatakitty.ssm.db.mybatis.SDelEntity;
 import java.util.Date;
 import javax.persistence.Table;
 import lombok.Data;
