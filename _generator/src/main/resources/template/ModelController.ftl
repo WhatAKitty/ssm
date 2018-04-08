@@ -18,16 +18,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/${classNames}")
 public class ${className}Controller {
 
-    @Autowired
     private final ${className}Service ${uncapitalizedClassName}Service;
     private final RestWrapper restWrapper;
-
 
     /**
      * 初始化${funcName}Controller层
      *
      * @param ${uncapitalizedClassName}Service ${funcName}服务
      */
+    @Autowired
     public ${className}Controller(${className}Service ${uncapitalizedClassName}Service) {
         this.${uncapitalizedClassName}Service = ${uncapitalizedClassName}Service;
         this.restWrapper = RestWrapper

@@ -2,8 +2,9 @@ package ${packageName}.${moduleName}.${uncapitalizedClassName};
 
 import com.whatakitty.ssm.asserts.Asserts;
 import com.whatakitty.ssm.service.BusinessService;
-import org.springframework.stereotype.Service;
 import java.util.Date;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 
 /**
@@ -20,6 +21,7 @@ public class ${className}Service extends BusinessService<${className}, ${classNa
      *
      * @param mapper 数据库操作实例
      */
+    @Autowired
     public ${className}Service(${className}Mapper mapper) {
         super(mapper, ${className}.class);
     }
