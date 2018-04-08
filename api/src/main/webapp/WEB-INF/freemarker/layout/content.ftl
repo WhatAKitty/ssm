@@ -1,3 +1,4 @@
+[#include "./common/spring-security.ftl"]
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>

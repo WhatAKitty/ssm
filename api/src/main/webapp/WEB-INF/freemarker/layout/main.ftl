@@ -1,3 +1,4 @@
+[#include "./common/spring-security.ftl"]
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -9,10 +10,12 @@
 </head>
 <body class="easyui-layout">
 <div data-options="region:'north',border:false" class="super-north" style="height:50px;">
-[#include "header.ftl"]
+[#include "component/header.ftl"]
 </div>
 <div id="easyui-layout-west" data-options="region:'west',title:'菜单',border:false">
-[#include "menu.ftl"]
+    <div class="easyui-accordion" data-options="border:false,fit:true,selected:true">
+        [#include "component/menu.ftl"]
+    </div>
 </div>
 <div data-options="region:'center'" style="padding-top:2px;">
 [@layout.block name="content"]
@@ -27,7 +30,7 @@
         $("#logout").on('click', function () {
             $.messager.confirm('提示', '确定退出系统？', function (r) {
                 if (r) {
-                    $.post('/logout', function(data) {
+                    $.post('/logout', function (data) {
                         window.location.href = data.redirect;
                     });
                 }

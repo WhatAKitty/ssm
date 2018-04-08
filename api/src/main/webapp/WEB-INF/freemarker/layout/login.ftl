@@ -47,18 +47,18 @@
 </div>
 [@layout.block name="script"]
     [#include "./common/theme.js.ftl"]
-<script type="text/javascript">
-    $(function () {
-        /*登录系统*/
-        $('#form').submit(function () {
-            if ($('input[name=username]').val() != 'admin') {
-                $('.error-tip').fadeIn(200);
-                return false;
-            }
-            return true;
+    <script type="text/javascript">
+        $(function () {
+            /*登录系统*/
+            $('#form').submit(function () {
+                if ($('input[name=username]').val() != 'admin') {
+                    $('.error-tip').fadeIn(200);
+                    return false;
+                }
+                return true;
+            });
         });
-    });
-</script>
+    </script>
 [/@layout.block]
 </body>
 </html>
