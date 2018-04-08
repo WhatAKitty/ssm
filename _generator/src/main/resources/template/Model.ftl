@@ -4,6 +4,7 @@ import com.whatakitty.ssm.db.mybatis.SDelEntity;
 import java.util.Date;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * ${funcName}实体类
@@ -13,6 +14,7 @@ import lombok.Data;
  **/
 @Data
 @Table(name = "${tableName}")
+@EqualsAndHashCode(callSuper = true)
 public class ${className} extends SDelEntity {
 
     <#list schema.getKeys() as key>
