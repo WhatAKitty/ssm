@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.whatakitty.ssm</groupId>
+    <artifactId>ssm</artifactId>
+    <version>${ssm.version}</version>
+    <packaging>pom</packaging>
+
+    <name>ssm</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.8</jdk.version>
+        <ssm.version>1.0-SNAPSHOT</ssm.version>
+    </properties>
+
+    <modules>
+        <module>_generator</module>
+        <module>dependencies</module>
+        <module>commons</module>
+        <module>api</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <target>${jdk.version}</target>
+                    <source>${jdk.version}</source>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

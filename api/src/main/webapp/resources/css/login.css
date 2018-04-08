@@ -1,0 +1,71 @@
+* {
+    font-family: "tahoma", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+
+body {
+    background: #f3f3f4;
+    width: 99%;
+    height: 100%;
+}
+
+#login-body {
+    width: 270px;
+    margin: 0 auto;
+}
+
+.project-icon-div,
+.welcome-div {
+    text-align: center;
+}
+
+.welcome-tip {
+    color: #666666;
+    font-size: 16px;
+}
+
+.project-icon-div {
+    color: #91969A;
+    font-size: 160px;
+}
+
+.login-form-div input[type=text] {
+    width: 270px;
+    height: 26px;
+    line-height: 26px;
+    background-color: #FFF !important;
+    text-indent: 1em !important;
+    color: #666666;
+}
+
+.login-form-div .login-btn {
+    width: 275px;
+    height: 35px;
+    color: #FFF !important;
+    overflow: hidden;
+    border-radius: 1px !important;
+    background: #1ab394 !important;
+    border-color: #1ab394 !important;
+}
+
+.login-form-div .l-btn-text {
+    vertical-align: middle !important;
+}
+
+.login-form-div .login-btn:hover {
+    background: #338473 !important;
+    border-color: #338473 !important;
+}
+
+.login-form-div .error-tip {
+    color: darkred;
+    margin-top: 5px;
+    text-align: right;
+    font-size: 14px;
+}
+
+.remember_me,
+.copyright-text,
+.copyright-text a {
+    color: #666666;
+    font-size: 14px;
+}
