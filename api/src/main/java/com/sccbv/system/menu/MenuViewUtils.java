@@ -20,7 +20,7 @@ public class MenuViewUtils {
             "%s</div></div>";
 
     private static final String DEPTH_ONE_TEMPLATE =
-        "<div title=\"%s\" data-options=\"%s\" style=\"padding-left: 10px;\">" +
+        "<div title=\"%s\" data-options=\"%s\" style=\"\">" +
             "<ul id=\"%s\">%s</ul></div>";
 
     private static final String ITEM_TEMPLATE = "<li data-url='%s'>%s</li>";
