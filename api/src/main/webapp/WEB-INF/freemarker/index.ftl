@@ -5,7 +5,7 @@
 <!--主要内容-->
 <div id="tt" class="easyui-tabs" data-options="border:false,fit:true">
     <div title="首页" data-options="iconCls:'fa fa-home'">
-        <iframe src="${root}/demo/first" width="100%" height="99%" frameborder="no"></iframe>
+        Welcome, anyone!
     </div>
 </div>
 [/@layout.put]

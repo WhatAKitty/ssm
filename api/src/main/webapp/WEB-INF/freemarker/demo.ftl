@@ -1,4 +1,5 @@
 [@layout.extends name="./layout/content.ftl"]
+[@layout.put block="id"]demo[/@layout.put]
 [@layout.put block="title"]首页[/@layout.put]
 [@layout.put block="css"]
 <style type="text/css">

@@ -30,7 +30,7 @@ public class ExampleController {
         return "index";
     }
 
-    @RequestMapping(value = "/first", method = RequestMethod.GET)
+    @RequestMapping(value = "/example", method = RequestMethod.GET)
     public String first() {
         return "demo";
     }
