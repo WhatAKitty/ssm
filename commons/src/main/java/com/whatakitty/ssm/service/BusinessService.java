@@ -22,7 +22,7 @@ import com.whatakitty.ssm.db.mybatis.BaseEntity;
 import com.whatakitty.ssm.db.mybatis.IdEntity;
 import com.whatakitty.ssm.db.mybatis.SDelEntity;
 import com.whatakitty.ssm.dto.Pageable;
-import com.whatakitty.ssm.id.IdGenerate;
+import com.whatakitty.ssm.utils.IdGenerate;
 import com.whatakitty.ssm.utils.BusinessIdsUtils;
 import java.util.Date;
 import java.util.List;
@@ -302,7 +302,6 @@ public abstract class BusinessService<T extends IdEntity, D> extends BaseService
      * @param date 创建日期
      * @return 列表
      */
-    @Deprecated
     public List<T> batchCreate(List<D> ds, Date date) {
         return businessIdsUtils.batchInsert(ds, date, (i) -> {
             final D item = ds.get(i);

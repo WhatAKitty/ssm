@@ -1,4 +1,4 @@
-package com.whatakitty.ssm.id;
+package com.whatakitty.ssm.utils;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
