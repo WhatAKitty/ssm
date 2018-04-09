@@ -1,6 +1,5 @@
 package com.sccbv.demo;
 
-import java.util.Date;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -32,11 +31,13 @@ public class BookDTO {
     /**
      * 图书创建验证组
      */
-    public interface BookCreateGroup {}
+    public interface BookCreateGroup {
+    }
 
     /**
      * 图书更新验证组
      */
-    public interface BookUpdateGroup {}
+    public interface BookUpdateGroup {
+    }
 
 }

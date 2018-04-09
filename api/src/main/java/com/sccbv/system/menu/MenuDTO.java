@@ -1,7 +1,5 @@
 package com.sccbv.system.menu;
 
-import java.util.Date;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -34,11 +32,13 @@ public class MenuDTO {
     /**
      * 菜单创建验证组
      */
-    public interface MenuCreateGroup {}
+    public interface MenuCreateGroup {
+    }
 
     /**
      * 菜单更新验证组
      */
-    public interface MenuUpdateGroup {}
+    public interface MenuUpdateGroup {
+    }
 
 }

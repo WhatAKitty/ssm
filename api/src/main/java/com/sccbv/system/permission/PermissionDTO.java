@@ -1,4 +1,3 @@
-
 package com.sccbv.system.permission;
 
 import lombok.Data;
