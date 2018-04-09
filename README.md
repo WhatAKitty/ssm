@@ -9,6 +9,11 @@
 * EasyUI Latest
 * [EasyUI Super Theme](https://github.com/itcodes/easyui-super-theme)
 
+## Preview
+
+![common component preview](https://static.xuqiang.me/public/images/135739.png)
+![book example preview](https://static.xuqiang.me/public/images/135711.png)
+
 ## RoadMap
 - [x] Basic Framework
 - [ ] Add more common ui component
