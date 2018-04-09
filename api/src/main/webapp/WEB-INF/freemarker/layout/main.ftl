@@ -37,6 +37,10 @@
             });
         });
     });
+
+    function messager() {
+        return $.messager;
+    }
 </script>
 [/@layout.block]
 </body>

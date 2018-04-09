@@ -1,13 +1,11 @@
 package com.sccbv.demo;
 
-
 import com.sccbv.config.db.MyMapper;
 
 /**
- * Created with IntelliJ IDEA.
+ * 图书数据操作类
  *
- * @author xuqiang
- * @date 2018/04/06
+ * @date 2018/04/09
  * @description
  **/
 public interface BookMapper extends MyMapper<Book> {

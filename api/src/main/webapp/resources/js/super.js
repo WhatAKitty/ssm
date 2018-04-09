@@ -17,24 +17,6 @@ $.fn.filebox.defaults.height = 32;
 $.fn.menu.defaults.noline = true
 $.fn.progressbar.defaults.height = 18; //进度条
 
-/**
- * ajax全局设置
- */
-$.ajaxPrefilter(function (options, originalOptions, jqXHR) {
-    if (options.type.toLowerCase() === "post") {
-        var csrf_token = $('meta[csrf-token]').attr('csrf-token');
-        var csrf_token_name = $("meta[csrf-token-name]").attr('csrf-token-name');
-        // initialize `data` to empty string if it does not exist
-        options.data = options.data || "";
-
-        // add leading ampersand if `data` is non-empty
-        options.data += options.data ? "&" : "";
-
-        // add _token entry
-        options.data += csrf_token_name + "=" + encodeURIComponent(csrf_token);
-    }
-});
-
 $(function () {
     /*左侧导航分类选中样式*/
     $(".panel-body .accordion-body>ul>li").on('click', function () {
@@ -48,10 +30,15 @@ $(function () {
         if ($("#tt").tabs('exists', tabTitle)) {
             $("#tt").tabs('select', tabTitle);
         } else {
+            if (tabUrl){
+                content = '<iframe frameborder="0"  src="'+tabUrl+'" style="width:100%;height:99%;"></iframe>';
+            } else {
+                content = '未实现';
+            }
             $('#tt').tabs('add', {
                 title: tabTitle,
-                href: tabUrl,
-                closable: true
+                closable: true,
+                content: content
             });
         }
     });
@@ -95,25 +82,4 @@ $(function () {
 });
 $.parser.onComplete = function () {
     $("#index").css('opacity', 1);
-}
-
-/**
- * 初始化示例
- */
-function initDemo() {
-    /*初始化示例div*/
-    var demoPanelId = 'demoPanel' + (new Date()).getTime();
-    $('#demoPanel').attr('id', demoPanelId);
-    var demoPaneCodeId = 'demoPanelCode' + (new Date()).getTime();
-    $('#demoPanelCode').attr('id', demoPaneCodeId);
-
-    /*示例导航选中样式*/
-    $(".demo-list>ul>li").on('click', function () {
-        $('#et-demo').tabs('select', '预览');
-
-        $(this).siblings().removeClass('super-accordion-selected');
-        $(this).addClass('super-accordion-selected');
-        //加载页面
-        $('#' + demoPanelId).panel('open').panel('refresh', $(this).data('url'));
-    });
 }

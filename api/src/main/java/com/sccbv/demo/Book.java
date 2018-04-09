@@ -1,18 +1,19 @@
 package com.sccbv.demo;
 
 import com.whatakitty.ssm.db.mybatis.SDelEntity;
+import java.util.Date;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 /**
- * 图书实体
+ * 图书实体类
  *
- * @author whatakitty
- * @date 2018/04/05
- */
+ * @date 2018/04/09
+ * @description
+ **/
 @Data
-@NoArgsConstructor
+@Table(name = "book")
 @EqualsAndHashCode(callSuper = true)
 public class Book extends SDelEntity {
 
@@ -22,8 +23,9 @@ public class Book extends SDelEntity {
     private String name;
 
     /**
-     * 图书数量
+     * 馆藏数量
      */
-    private int number;
+    private Integer number;
+
 
 }

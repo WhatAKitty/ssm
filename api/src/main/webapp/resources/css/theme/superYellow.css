@@ -540,7 +540,7 @@ ul, ol, dl {
 
 .textbox-icon {
     color: #000;
-    line-height: 30px;
+    line-height: 30px !important;
     text-align: center;
 }
 

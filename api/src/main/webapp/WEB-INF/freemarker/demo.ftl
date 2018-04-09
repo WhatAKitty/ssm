@@ -29,7 +29,7 @@
     }
     .index-l {
         padding: 10px;
-        width: 48%;
+        width: 100%;
         overflow: auto;
     }
     .form-item {
