@@ -11,8 +11,8 @@
 
 ## Preview
 
-![common component preview](https://static.xuqiang.me/public/images/135739.png)
-![book example preview](https://static.xuqiang.me/public/images/135711.png)
+![common component preview](https://static.xuqiang.me/public/images/140108.png)
+![book example preview](https://static.xuqiang.me/public/images/140123.png)
 
 ## RoadMap
 - [x] Basic Framework
