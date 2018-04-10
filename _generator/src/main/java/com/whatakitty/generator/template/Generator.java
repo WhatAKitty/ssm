@@ -64,11 +64,20 @@ public class Generator {
             model.put("classNames", English.plural(StringUtils.uncapitalize(localStorage.get("className"))));
 
             File templateDir = new File(templatePath);
-            File[] tempFiles = templateDir.listFiles();
-            for (File tempFile : tempFiles) {
+            File[] javaFiles = templateDir.listFiles(File::isFile);
+            for (File tempFile : javaFiles) {
                 String baseName = FilenameUtils.getBaseName(tempFile.getName());
-                generateTemps(baseName, model);
+                generateTemps(baseName, model, ".java");
             }
+            File pagesDir = new File(templatePath + File.separator + "pages");
+            if (pagesDir.exists() && pagesDir.isDirectory()) {
+                File[] pageFiles = pagesDir.listFiles(File::isFile);
+                for (File pageFile : pageFiles) {
+                    String baseName = FilenameUtils.getBaseName(pageFile.getName());
+                    generateTemps("pages" + File.separator + baseName, model, ".ftl");
+                }
+            }
+
 
         } catch (SQLException e) {
             return false;
@@ -77,7 +86,7 @@ public class Generator {
         return true;
     }
 
-    private void generateTemps(String fileName, Map<String, Object> model) {
+    private void generateTemps(String fileName, Map<String, Object> model, String targetExtension) {
         final String className = (String) model.get("className");
         final String name = fileName.replace("Model", className);
 
@@ -86,7 +95,7 @@ public class Generator {
             + model.get("moduleName")
             + File.separator
             + name
-            + ".java";
+            + targetExtension;
 
         TemplateKit.process(fileName + ".ftl", filePath, model);
 
