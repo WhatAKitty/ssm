@@ -26,7 +26,6 @@
     </form>
     [/@layout.put]
     [@layout.put block="script"]
-    <script type="application/javascript" src="${root}/resources/js/list.js"></script>
     <script>
         $(function() {
             $('#bookAddForm').ajaxForm('POST', function() {
