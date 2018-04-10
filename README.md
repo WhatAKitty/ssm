@@ -9,6 +9,11 @@
 * EasyUI Latest
 * [EasyUI Super Theme](https://github.com/itcodes/easyui-super-theme)
 
+## Features
+* SSM
+* Support code generate
+* Support theme ui
+
 ## Preview
 
 ![common component preview](https://static.xuqiang.me/public/images/140108.png)
