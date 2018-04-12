@@ -24,6 +24,18 @@
 - [ ] Add more common ui component
 - [ ] Add system functions user interface
 
+## Usage
+
+### Code Generation
+
+* Run `Application.java` in `_generator` submodule
+* First, you should set database configuration what the program asked
+* Second, specific which table would you like to use
+* And then, the generator will auto create the crud java files and ftl pages for you
+* Last, the file window will auto open(The mac is finder app)
+* All you can see is generated files, and put them into your projects and modify something
+* All right, all things has done, you can run app in web container and see the views you want
+
 ## Attention
 
 ### Potential security vulnerability
