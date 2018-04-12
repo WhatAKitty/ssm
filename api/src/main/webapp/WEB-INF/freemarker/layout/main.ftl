@@ -7,6 +7,12 @@
     [@layout.block name="css"]
         [#include "./common/theme.ftl"]
     [/@layout.block]
+    <script>
+        // 防止嵌套
+        if (self !== top) {
+            top.location.href = self.location.href;
+        }
+    </script>
 </head>
 <body class="easyui-layout">
 <div data-options="region:'north',border:false" class="super-north" style="height:50px;">
