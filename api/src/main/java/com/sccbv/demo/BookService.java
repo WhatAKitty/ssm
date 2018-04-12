@@ -47,7 +47,7 @@ public class BookService extends BusinessService<Book, BookDTO> {
     }
 
     /**
-     * 查询数据字典
+     * 查询图书
      *
      * @param pageable 分页信息
      * @param bookDTO  条件载体
