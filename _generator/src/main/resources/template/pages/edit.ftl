@@ -4,7 +4,7 @@
     [@layout.put block="css"][/@layout.put]
     [@layout.put block="content" type="replace"]
     <div class="super-list-title-wrapper">
-        <h1>${funcName}增加页面</h1>
+        <h1>${funcName}编辑页面</h1>
     </div>
 
     <form id="${uncapitalizedClassName}EditForm" action="${'$'}{root}/${moduleName}/${classNames}" method="put" class="super-form-page">

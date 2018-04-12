@@ -1,10 +1,14 @@
 package ${packageName}.${moduleName}.${uncapitalizedClassName};
 
+import com.google.common.collect.ImmutableMap;
 import com.whatakitty.ssm.asserts.Asserts;
+import com.whatakitty.ssm.dto.Pageable;
 import com.whatakitty.ssm.service.BusinessService;
+import com.whatakitty.ssm.utils.OrderByUtils;
 import java.util.Date;
-import org.springframework.stereotype.Service;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 /**
@@ -40,6 +44,33 @@ public class ${className}Service extends BusinessService<${className}, ${classNa
             example.and().andNotEqualTo("id", excludeId);
         }
         Asserts.isFalse(existsByExample(example, false), 400, "已经存在相同的${funcName}");
+    }
+
+    /**
+     * 查询${funcName}
+     *
+     * @param pageable 分页信息
+     * @param ${uncapitalizedClassName}DTO  条件载体
+     * @param isPage   是否允许分页
+     * @param force    是否包含被软删除的记录
+     * @return 查询结果
+     */
+    public Object search(Pageable pageable, ${className}DTO ${uncapitalizedClassName}DTO, boolean isPage, boolean force) {
+        Example example = new Example(${className}.class);
+        if (StringUtils.isNotBlank(${uncapitalizedClassName}DTO.getName())) {
+            example.and().andLike("name", ${uncapitalizedClassName}DTO.getName() + "%");
+        }
+        // TODO 需要删除不需要的排序字段
+        String orderBy = OrderByUtils.getOrderBy(pageable.getSort(), ImmutableMap.of(
+            <#list schema.getKeys() as key>
+            <#assign col = schema.get(key) />
+            "${col.getCamelColumnName()}", "<#if col.getDATA_TYPE() == "String">convert(${col.getCamelColumnName()} using gbk)<#else>${col.getCamelColumnName()}</#if>"<#if key_has_next>,</#if>
+            </#list>
+        ));
+        if (StringUtils.isNotBlank(orderBy)) {
+            example.setOrderByClause(orderBy);
+        }
+        return super.pageByExample(pageable, example, isPage, force);
     }
 
     /**

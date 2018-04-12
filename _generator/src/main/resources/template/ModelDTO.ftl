@@ -16,6 +16,7 @@ public class ${className}DTO {
 
     private Long id;
 
+    // TODO 需要删除不需要的字段并且添加对应的验证条件
     <#list schema.getKeys() as key>
     <#assign col = schema.get(key) />
     <#if !["id", "createDate", "modifyDate", "isDel"]?seq_contains(col.getCamelColumnName())>

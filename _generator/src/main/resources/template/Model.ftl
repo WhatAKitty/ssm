@@ -17,6 +17,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class ${className} extends SDelEntity {
 
+    // TODO 需要删除不需要的字段
     <#list schema.getKeys() as key>
     <#assign col = schema.get(key) />
     <#if !["id", "createDate", "modifyDate", "isDel"]?seq_contains(col.getCamelColumnName())>
