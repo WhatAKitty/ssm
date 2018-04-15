@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.20)
 # Database: ssm
-# Generation Time: 2018-04-15 15:40:31 +0000
+# Generation Time: 2018-04-15 15:46:05 +0000
 # ************************************************************
 
 
@@ -89,6 +89,7 @@ DROP TABLE IF EXISTS `sys_conf`;
 
 CREATE TABLE `sys_conf` (
   `id` bigint(32) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `company` varchar(20) DEFAULT NULL COMMENT '公司名',
   `theme` varchar(64) DEFAULT NULL COMMENT '主题',
   `insite_messager` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否启用站内信',
   `insite_email` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否启用站内邮件',
@@ -99,9 +100,9 @@ CREATE TABLE `sys_conf` (
 LOCK TABLES `sys_conf` WRITE;
 /*!40000 ALTER TABLE `sys_conf` DISABLE KEYS */;
 
-INSERT INTO `sys_conf` (`id`, `theme`, `insite_messager`, `insite_email`, `alert`)
+INSERT INTO `sys_conf` (`id`, `company`, `theme`, `insite_messager`, `insite_email`, `alert`)
 VALUES
-	(1,'TURQUOISE',b'0',b'0',b'0');
+	(1,'XX','TURQUOISE',b'0',b'0',b'0');
 
 /*!40000 ALTER TABLE `sys_conf` ENABLE KEYS */;
 UNLOCK TABLES;

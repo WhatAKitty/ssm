@@ -17,6 +17,11 @@ import lombok.EqualsAndHashCode;
 public class Conf extends IdEntity {
 
     /**
+     * 公司名称
+     */
+    private String company;
+
+    /**
      * 主题
      */
     private String theme;

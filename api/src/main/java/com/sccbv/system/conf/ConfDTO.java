@@ -1,9 +1,7 @@
 package com.sccbv.system.conf;
 
-import java.util.Date;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 系统配置数据传输载体
@@ -15,6 +13,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class ConfDTO {
 
     private Long id;
+
+    @NotNull(
+        groups = {ConfCreateGroup.class, ConfUpdateGroup.class},
+        message = "{error.message.conf.insiteMessager.null}"
+    )
+    private String company;
 
     private String theme;
 
@@ -40,11 +44,13 @@ public class ConfDTO {
     /**
      * 系统配置创建验证组
      */
-    public interface ConfCreateGroup {}
+    public interface ConfCreateGroup {
+    }
 
     /**
      * 系统配置更新验证组
      */
-    public interface ConfUpdateGroup {}
+    public interface ConfUpdateGroup {
+    }
 
 }
