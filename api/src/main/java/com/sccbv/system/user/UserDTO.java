@@ -1,25 +1,21 @@
 package com.sccbv.system.user;
 
-import javax.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * 系统用户数据载体类
+ * 用户数据传输载体
  *
- * @author yuhailun
- * @date 2018/01/12
+ * @date 2018/04/12
  * @description
  **/
 @Data
-@Builder
 public class UserDTO {
 
     private Long id;
 
     @NotEmpty(
-        groups = {UserCreateGroup.class},
+        groups = {UserCreateGroup.class, UserUpdateGroup.class},
         message = "{error.message.user.username.empty}"
     )
     private String username;
@@ -31,41 +27,26 @@ public class UserDTO {
     private String password;
 
     @NotEmpty(
-        groups = {UserCreateGroup.class},
+        groups = {UserCreateGroup.class, UserUpdateGroup.class},
         message = "{error.message.user.name.empty}"
     )
     private String name;
 
-    private Long schoolId;
-
-    private Long majorId;
-
-    @NotNull(
-        groups = {UserCreateGroup.class},
-        message = "{error.message.user.isExpired.null}"
-    )
     private Boolean isExpired;
 
-    @NotNull(
-        groups = {UserCreateGroup.class},
-        message = "{error.message.user.isLocked.null}"
-    )
     private Boolean isLocked;
 
-    @NotNull(
-        groups = {UserCreateGroup.class},
-        message = "{error.message.user.isEnabled.null}"
-    )
     private Boolean isEnabled;
 
+
     /**
-     * @date 2018/01/12
+     * 用户创建验证组
      */
     public interface UserCreateGroup {
     }
 
     /**
-     * @date 2018/01/12
+     * 用户更新验证组
      */
     public interface UserUpdateGroup {
     }

@@ -7,8 +7,8 @@ import com.whatakitty.ssm.service.BusinessService;
 import com.whatakitty.ssm.utils.OrderByUtils;
 import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 /**
@@ -33,8 +33,8 @@ public class BookService extends BusinessService<Book, BookDTO> {
     /**
      * 检查图书是否有效
      *
-     * @param bookDTO 图书信息
-     * @param excludeId   排除的图书
+     * @param bookDTO   图书信息
+     * @param excludeId 排除的图书
      */
     public void valid(BookDTO bookDTO, Long excludeId) {
         Example example = Example.builder(Book.class).build();

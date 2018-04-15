@@ -1,20 +1,20 @@
 package com.sccbv.system.user;
 
 import com.whatakitty.ssm.db.mybatis.SDelEntity;
+import java.util.Date;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 系统用户实体类
+ * 用户实体类
  *
- * @author yuhailun
- * @date 2018/01/12
+ * @date 2018/04/12
  * @description
  **/
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Table(name = "auth_user")
+@EqualsAndHashCode(callSuper = true)
 public class User extends SDelEntity {
 
     /**
@@ -23,7 +23,7 @@ public class User extends SDelEntity {
     private String username;
 
     /**
-     * 用户密码
+     * 密码
      */
     private String password;
 
@@ -47,5 +47,5 @@ public class User extends SDelEntity {
      */
     private Boolean isEnabled;
 
-}
 
+}

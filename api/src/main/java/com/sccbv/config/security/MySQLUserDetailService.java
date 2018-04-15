@@ -49,7 +49,7 @@ public class MySQLUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDTO userDTO = UserDTO.builder().build();
+        UserDTO userDTO = new UserDTO();
         userDTO.setUsername(username);
         userDTO.setIsEnabled(true);
         userDTO.setIsExpired(false);

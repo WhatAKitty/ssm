@@ -69,7 +69,7 @@ public class UsersRolesService extends BusinessService<UsersRoles, UsersRolesDTO
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)
     public Object create(UsersRolesDTO usersRolesDTO) {
         final Date date = new Date();
-        final UserDTO userDTO = UserDTO.builder().build();
+        final UserDTO userDTO = new UserDTO();
 
         if (usersRolesDTO.getUserId() == null) {
             BeanUtils.copyProperties(usersRolesDTO, userDTO);
@@ -121,7 +121,7 @@ public class UsersRolesService extends BusinessService<UsersRoles, UsersRolesDTO
             roleIdList = new ArrayList<>();
         }
 
-        UserDTO userDTO = UserDTO.builder().build();
+        UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(usersRolesDTO, userDTO);
         userService.update(userId, userDTO);
 
