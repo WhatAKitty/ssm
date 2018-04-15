@@ -1,5 +1,10 @@
 
 /** 布局 **/
+.col-2 {
+    display: inline-block;
+    width: 17%;
+}
+
 .col-3 {
     display: inline-block;
     width: 33.33%;
@@ -8,6 +13,11 @@
 .col-6 {
     display: inline-block;
     width: 49.5%;
+}
+
+.col-10 {
+    display: inline-block;
+    width: 82%;
 }
 
 .col-12 {
@@ -21,6 +31,10 @@
 }
 
 /** 表单 **/
+.form-item {
+    min-height: 32px !important;
+}
+
 .form-horizontal > .form-item {
     display: inline-block;
 }
