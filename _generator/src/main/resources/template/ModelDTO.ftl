@@ -2,6 +2,7 @@ package ${packageName}.${moduleName}.${uncapitalizedClassName};
 
 import java.util.Date;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -12,6 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @description
  **/
 @Data
+@Builder
 public class ${className}DTO {
 
     private Long id;
