@@ -17,6 +17,10 @@ $.fn.filebox.defaults.height = 32;
 $.fn.menu.defaults.noline = true
 $.fn.progressbar.defaults.height = 18; //进度条
 
+$.parser.onComplete = function () {
+    $("#index").css('opacity', 1);
+}
+
 $(function () {
     /*左侧导航分类选中样式*/
     $(".panel-body .accordion-body>ul>li").on('click', function () {
@@ -80,6 +84,4 @@ $(function () {
         $(this).addClass('themeActive');
     });
 });
-$.parser.onComplete = function () {
-    $("#index").css('opacity', 1);
-}
+

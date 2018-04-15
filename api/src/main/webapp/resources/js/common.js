@@ -29,6 +29,12 @@ $(function () {
                 o[this.name] = this.value || '';
             }
         });
+        var $radio = $('input[type=radio],input[type=checkbox]', this);
+        $.each($radio, function () {
+            if (!o.hasOwnProperty(this.name)) {
+                o[this.name] = this.value || '';
+            }
+        });
         return o;
     };
 
@@ -57,12 +63,17 @@ $(function () {
     $document.on('click', '.btn-back', function () {
         history.back()
     });
+    $('.easyui-switchbutton').switchbutton({
+        'onChange': function (checked) {
+            $(this).switchbutton('setValue', checked);
+        }
+    });
 
     $.showRemoveDialog = function (url, success, fail) {
         $.messager.confirm({
             title: '确认',
             msg: '是否确认删除？',
-            fn: function(r) {
+            fn: function (r) {
                 if (!r) {
                     return;
                 }
@@ -80,7 +91,6 @@ $(function () {
             }
         })
     };
-
 
     $.message = function (title, msg) {
         $.messager.show({
