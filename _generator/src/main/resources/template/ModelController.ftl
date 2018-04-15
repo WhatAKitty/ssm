@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @description
  **/
 @Controller
-@RequestMapping("/${classNames}")
+@RequestMapping("/${moduleName}/${classNames}")
 public class ${className}Controller {
 
     private final ${className}Service ${uncapitalizedClassName}Service;
@@ -44,9 +44,22 @@ public class ${className}Controller {
     }
 
 
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public ModelAndView itemView(
+        @PathVariable("id") Long id,
+        ModelAndView modelAndView
+    ) {
+        ${className} ${uncapitalizedClassName} = ${uncapitalizedClassName}Service.byPrimaryKey(id, false);
+
+        modelAndView.setViewName("/pages/${moduleName}/${uncapitalizedClassName}/view");
+        modelAndView.addObject("${uncapitalizedClassName}", ${uncapitalizedClassName});
+        return modelAndView;
+    }
+
+
     @RequestMapping(value = "/add/view", method = RequestMethod.GET)
     public String addView() {
-        return "pages/${moduleName}/${uncapitalizedClassName}/add";
+        return "pages/${moduleName}/${uncapitalizedClassName}/replace";
     }
 
 
@@ -57,7 +70,7 @@ public class ${className}Controller {
     ) {
         ${className} ${uncapitalizedClassName} = ${uncapitalizedClassName}Service.byPrimaryKey(id, false);
 
-        modelAndView.setViewName("/pages/${moduleName}/${uncapitalizedClassName}/edit");
+        modelAndView.setViewName("/pages/${moduleName}/${uncapitalizedClassName}/replace");
         modelAndView.addObject("${uncapitalizedClassName}", ${uncapitalizedClassName});
         return modelAndView;
     }

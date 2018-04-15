@@ -8,7 +8,7 @@
     </div>
 
     <div id="${uncapitalizedClassName}List-toolbar" class="super-list-toolbar">
-        <div class="col-6">
+        <div class="col-10">
             <form id="${uncapitalizedClassName}SearchForm" action="${'$'}{root}/${moduleName}/${classNames}" method="get" class="form-horizontal">
 
                 <#list schema.getKeys() as key>
@@ -27,7 +27,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-6 content-right">
+        <div class="col-2 content-right">
             <a id="addBtn" href="${'$'}{root}/${moduleName}/${classNames}/add/view" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a>
         </div>
     </div>
@@ -65,7 +65,9 @@
             }
 
             function formatOper(val,row,index){
-                return '<a href="${'$'}{root}/${moduleName}/${classNames}/edit/view/' + row.id + '">修改</a>' +
+                return '<a href="${'$'}{root}/${moduleName}/${classNames}/view/' + row.id + '">查看</a>' +
+                        '&nbsp;|&nbsp;' +
+                        '<a href="${'$'}{root}/${moduleName}/${classNames}/edit/view/' + row.id + '">修改</a>' +
                         '&nbsp;|&nbsp;' +
                         '<a href="javascript:;" onclick="deleteRow(' + row.id + ', ' + index + ')">删除</a>';
             }
