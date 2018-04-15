@@ -30,7 +30,7 @@
                    value="${'$'}{${uncapitalizedClassName}.${col.getCamelColumnName()}}"
                    [/#if]
                    </#if>
-                   data-options="required:true<#if col.getDATA_TYPE() == 'Boolean'>,onText:'开启',offText:'关闭',value:'[#if ${uncapitalizedClassName}??]${${uncapitalizedClassName}.${col.getCamelColumnName()}?string('true', 'false')}[#else]true[/#if]'</#if>">
+                   data-options="required:true<#if col.getDATA_TYPE() == 'Boolean'>,onText:'开启',offText:'关闭',value:'[#if ${uncapitalizedClassName}??]${'$'}{${uncapitalizedClassName}.${col.getCamelColumnName()}?string('true', 'false')}[#else]true[/#if]'</#if>">
         </div>
             </#if>
         </#list>
