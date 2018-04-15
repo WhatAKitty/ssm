@@ -28,6 +28,36 @@
     正在开发中...
 [/@layout.block]
 </div>
+<div id="win">
+    <div class="themeItem">
+        <ul>
+            <li [#if conf.theme == "TURQUOISE"]class="themeActive"[/#if]>
+                <div class="TURQUOISE">TURQUOISE</div>
+            </li>
+            <li [#if conf.theme == "EMERALD"]class="themeActive"[/#if]>
+                <div class="EMERALD">EMERALD</div>
+            </li>
+            <li [#if conf.theme == "PETER-RIVER"]class="themeActive"[/#if]>
+                <div class="PETER-RIVER">PETER RIVER</div>
+            </li>
+            <li [#if conf.theme == "AMETHYST"]class="themeActive"[/#if]>
+                <div class="AMETHYST">AMETHYST</div>
+            </li>
+            <li [#if conf.theme == "WET-ASPHALT"]class="themeActive"[/#if]>
+                <div class="WET-ASPHALT">WET ASPHALT</div>
+            </li>
+            <li [#if conf.theme == "SUN-FLOWER"]class="themeActive"[/#if]>
+                <div class="SUN-FLOWER">SUN FLOWER</div>
+            </li>
+            <li [#if conf.theme == "CARROT"]class="themeActive"[/#if]>
+                <div class="CARROT">CARROT</div>
+            </li>
+            <li [#if conf.theme == "ALIZARIN"]class="themeActive"[/#if]>
+                <div class="ALIZARIN">ALIZARIN</div>
+            </li>
+        </ul>
+    </div>
+</div>
 [@layout.block name="script"]
     [#include "./common/theme.js.ftl"]
 <script>

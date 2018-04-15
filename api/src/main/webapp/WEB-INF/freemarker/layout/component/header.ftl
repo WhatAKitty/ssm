@@ -4,15 +4,15 @@
     <div class="super-navigation-main">
         <div class="super-setting-left">
             <ul>
+                [#if conf.insiteMessager]
                 <li><i class="fa fa-commenting-o"></i></li>
+                [/#if]
+                [#if conf.insiteEmail]
                 <li><i class="fa fa-envelope-o"></i></li>
+                [/#if]
+                [#if conf.alert]
                 <li><i class="fa fa-bell-o"></i></li>
-                <!--<div id="mm2" class="easyui-menu">
-                    <div>有情况</div>
-                    <div>你瞅啥</div>
-                    <div class="menu-sep"></div>
-                    <div>瞅你咋滴</div>
-                </div>-->
+                [/#if]
             </ul>
         </div>
         <div class="super-setting-right">
