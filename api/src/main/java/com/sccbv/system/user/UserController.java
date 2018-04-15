@@ -31,7 +31,6 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
-        // TODO 需要删除不想渲染给客户端的字段
         this.restWrapper = RestWrapper
             .create("id", "username", "password", "name", "isExpired", "isLocked", "isEnabled")
             .addHandler("id", String::valueOf);
