@@ -7,23 +7,24 @@
         <h1>${funcName}列表页面</h1>
     </div>
 
-    <div id="${uncapitalizedClassName}List-toolbar" class="super-list-toolbar">
+    <div id="${uncapitalizedClassName}List-toolbar" class="super-list-toolbar super-table-search-wrapper">
         <div class="col-10">
             <form id="${uncapitalizedClassName}SearchForm" action="${'$'}{root}/${moduleName}/${classNames}" method="get" class="form-horizontal">
-
-                <#list schema.getKeys() as key>
-                <#assign col = schema.get(key) />
-                <#if !["id", "createDate", "modifyDate", "isDel", "remark"]?seq_contains(col.getCamelColumnName())>
-                <div class="form-item">
-                    <label for="${col.getCamelColumnName()}" class="label-top">${col.getCOLUMN_COMMENT()}：</label>
-                    <input id="${col.getCamelColumnName()}" type="text" class="easyui-textbox" name="${col.getCamelColumnName()}" data-options=""/>
+                <div id="all" class="super-table-search">
+                    <#list schema.getKeys() as key>
+                    <#assign col = schema.get(key) />
+                    <#if !["id", "createDate", "modifyDate", "isDel", "remark"]?seq_contains(col.getCamelColumnName())>
+                    <div class="form-item">
+                        <label for="${col.getCamelColumnName()}" class="label-top">${col.getCOLUMN_COMMENT()}：</label>
+                        <input id="${col.getCamelColumnName()}" type="text" class="easyui-textbox" name="${col.getCamelColumnName()}" data-options=""/>
+                    </div>
+                    </#if>
+                    </#list>
                 </div>
-                </#if>
-                </#list>
-
                 <div class="form-item">
+                    <a href="javascript:;" onclick="toggleMore()" id="more" class="easyui-linkbutton default" data-options="iconCls:'fa fa-compress'">展开</a>
                     <a href="javascript:;" onclick="searchForm()" class="easyui-linkbutton default" data-options="iconCls:'fa fa-search'">搜索</a>
-                    <a href="javascript:;" onclick="resetForm()" type="reset" class="easyui-linkbutton default" data-options="iconCls:'fa fa-search'">重置</a>
+                    <a href="javascript:;" onclick="resetForm()" type="reset" class="easyui-linkbutton default" data-options="iconCls:'fa fa-undo'">重置</a>
                 </div>
             </form>
         </div>
@@ -62,6 +63,24 @@
             function resetForm() {
                 $('#${uncapitalizedClassName}SearchForm').form('reset');
                 $('#${uncapitalizedClassName}List').datagrid('load', {});
+            }
+            function toggleMore() {
+                var $all = $('#all'),
+                    $more = $('#more'),
+                    $text = $more.find('.l-btn-text'),
+                    $icon = $more.find('.l-btn-icon.fa');
+                console.log($icon)
+                if ($all.hasClass("opened")) {
+                    $all.removeClass("opened");
+                    $text.text('展开');
+                    $icon.removeClass("fa-expand");
+                    $icon.addClass("fa-compress");
+                } else {
+                    $all.addClass("opened");
+                    $text.text('收缩');
+                    $icon.removeClass("fa-compress");
+                    $icon.addClass("fa-expand");
+                }
             }
 
             function formatOper(val,row,index){
