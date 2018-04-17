@@ -82,9 +82,9 @@ public class RoleController {
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
     public Object search(Pageable pageable,
-                         @RequestBody(required = false) @Validated RoleDTO roleDTO,
+                         @Validated RoleDTO roleDTO,
                          @RequestParam(defaultValue = "false", required = false) boolean isPage) {
-        return RestPageWrapper.wrap(roleService.pageByDTO(pageable, roleDTO, isPage, false), restWrapper);
+        return RestPageWrapper.wrap(roleService.search(pageable, roleDTO, isPage, false), restWrapper);
     }
 
 
@@ -106,7 +106,7 @@ public class RoleController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
     public Object create(
-        @Validated(RoleDTO.RoleCreateGroup.class) @RequestBody RoleDTO roleDTO
+        @Validated(RoleDTO.RoleCreateGroup.class) RoleDTO roleDTO
     ) {
         return restWrapper.wrap(roleService.create(roleDTO, new Date()));
     }
@@ -117,7 +117,7 @@ public class RoleController {
     @RequestMapping(value = "/{roleId}", method = RequestMethod.PUT)
     public Object update(
         @PathVariable Long roleId,
-        @Validated(RoleDTO.RoleUpdateGroup.class) @RequestBody RoleDTO roleDTO
+        @Validated(RoleDTO.RoleUpdateGroup.class) RoleDTO roleDTO
     ) {
         return restWrapper.wrap(roleService.update(roleId, roleDTO, new Date()));
     }

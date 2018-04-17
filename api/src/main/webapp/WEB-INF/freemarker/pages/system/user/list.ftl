@@ -9,14 +9,14 @@
 
     <div id="roleList-toolbar" class="super-list-toolbar super-table-search-wrapper">
         <div class="col-10">
-            <form id="roleSearchForm" action="${root}/system/roles" method="get" class="form-horizontal">
+            <form id="userSearchForm" action="${root}/system/users" method="get" class="form-horizontal">
                 <div id="all" class="super-table-search">
                     <div class="form-item">
-                        <label for="code" class="label-top">编码：</label>
-                        <input id="code" type="text" class="easyui-textbox" name="code" data-options=""/>
+                        <label for="username" class="label-top">用户名：</label>
+                        <input id="username" type="text" class="easyui-textbox" name="username" data-options=""/>
                     </div>
                     <div class="form-item">
-                        <label for="name" class="label-top">名称：</label>
+                        <label for="name" class="label-top">姓名：</label>
                         <input id="name" type="text" class="easyui-textbox" name="name" data-options=""/>
                     </div>
                 </div>
@@ -57,6 +57,7 @@
         <script>
             function searchForm() {
                 var searchObj = $('#userSearchForm').serializeObject();
+                console.log(searchObj)
                 $('#userList').datagrid('load', searchObj);
             }
             function resetForm() {
@@ -68,7 +69,6 @@
                         $more = $('#more'),
                         $text = $more.find('.l-btn-text'),
                         $icon = $more.find('.l-btn-icon.fa');
-                console.log($icon)
                 if ($all.hasClass("opened")) {
                     $all.removeClass("opened");
                     $text.text('展开');

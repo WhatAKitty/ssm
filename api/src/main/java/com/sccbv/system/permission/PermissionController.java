@@ -81,7 +81,7 @@ public class PermissionController {
     public Object search(Pageable pageable,
                          PermissionDTO permissionDTO,
                          @RequestParam(defaultValue = "false") Boolean isPage) {
-        return restWrapper.wrap(permissionService.pageByDTO(pageable, permissionDTO, isPage, false));
+        return restWrapper.wrap(permissionService.search(pageable, permissionDTO, isPage, false));
     }
 
 
@@ -98,7 +98,7 @@ public class PermissionController {
     @RequestMapping(value = "/{permissionId}", method = RequestMethod.PUT)
     public Object update(@Validated({PermissionDTO.PermissionUpdateGroup.class}) @RequestBody PermissionDTO permissionDTO,
                          @PathVariable Long permissionId) {
-        return restWrapper.wrap(permissionService.update(permissionDTO, permissionId));
+        return restWrapper.wrap(permissionService.update(permissionId, permissionDTO));
     }
 
 
