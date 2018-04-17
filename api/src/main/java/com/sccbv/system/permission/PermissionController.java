@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 系统权限资源接口
@@ -16,21 +17,61 @@ import org.springframework.web.bind.annotation.*;
  * @description
  **/
 @Controller
-@RequestMapping("/permissions")
+@RequestMapping("/system/permissions")
 public class PermissionController {
 
-    @Autowired
-    private PermissionService permissionService;
-
+    private final PermissionService permissionService;
     private final RestWrapper restWrapper;
 
     /**
      * 初始化权限Controller层
+     *
+     * @param permissionService 权限服务
      */
-    public PermissionController() {
+    @Autowired
+    public PermissionController(PermissionService permissionService) {
+        this.permissionService = permissionService;
         this.restWrapper = RestWrapper
-            .create("id", "code", "name", "category")
-            .addHandler("id", id -> String.valueOf(id));
+            .create("id", "code", "name", "category", "remark")
+            .addHandler("id", String::valueOf);
+    }
+
+
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String indexView() {
+        return "pages/system/permission/list";
+    }
+
+
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public ModelAndView itemView(
+        @PathVariable("id") Long id,
+        ModelAndView modelAndView
+    ) {
+        Permission permission = permissionService.byPrimaryKey(id, false);
+
+        modelAndView.setViewName("/pages/system/permission/view");
+        modelAndView.addObject("permission", permission);
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/add/view", method = RequestMethod.GET)
+    public String addView() {
+        return "pages/system/permission/replace";
+    }
+
+
+    @RequestMapping(value = "/edit/view/{id}", method = RequestMethod.GET)
+    public ModelAndView editView(
+        @PathVariable("id") Long id,
+        ModelAndView modelAndView
+    ) {
+        Permission permission = permissionService.byPrimaryKey(id, false);
+
+        modelAndView.setViewName("/pages/system/permission/replace");
+        modelAndView.addObject("permission", permission);
+        return modelAndView;
     }
 
 
