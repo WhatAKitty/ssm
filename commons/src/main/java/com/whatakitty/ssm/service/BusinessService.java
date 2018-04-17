@@ -415,6 +415,10 @@ public abstract class BusinessService<T extends IdEntity, D> extends BaseService
 
     private T copyFromDTO(D d) {
         T t = newInstance();
+        if (d == null) {
+            return t;
+        }
+
         BeanUtils.copyProperties(d, t);
         return t;
     }
