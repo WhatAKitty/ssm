@@ -2,12 +2,16 @@ package com.sccbv.system.role;
 
 import com.sccbv.system.permission.Permission;
 import com.whatakitty.ssm.dto.Pageable;
+import com.whatakitty.ssm.wrapper.RestPageWrapper;
+import com.whatakitty.ssm.wrapper.RestWrapper;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 角色资源接口
@@ -17,58 +21,113 @@ import org.springframework.web.bind.annotation.*;
  * @description
  **/
 @Controller
-@RequestMapping(value = "/roles")
+@RequestMapping(value = "/system/roles")
 public class RoleController {
 
+    private final RoleService roleService;
+    private final RestWrapper restWrapper;
+
+    /**
+     * 初始化角色Controller层
+     *
+     * @param roleService 角色服务
+     */
     @Autowired
-    private RoleService roleService;
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
+        this.restWrapper = RestWrapper
+            .create("id", "code", "name")
+            .addHandler("id", String::valueOf);
+    }
+
+
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String indexView() {
+        return "pages/system/role/list";
+    }
+
+
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public ModelAndView itemView(
+        @PathVariable("id") Long id,
+        ModelAndView modelAndView
+    ) {
+        Role role = roleService.byPrimaryKey(id, false);
+
+        modelAndView.setViewName("/pages/system/role/view");
+        modelAndView.addObject("role", role);
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/add/view", method = RequestMethod.GET)
+    public String addView() {
+        return "pages/system/role/replace";
+    }
+
+
+    @RequestMapping(value = "/edit/view/{id}", method = RequestMethod.GET)
+    public ModelAndView editView(
+        @PathVariable("id") Long id,
+        ModelAndView modelAndView
+    ) {
+        Role role = roleService.byPrimaryKey(id, false);
+
+        modelAndView.setViewName("/pages/system/role/replace");
+        modelAndView.addObject("role", role);
+        return modelAndView;
+    }
+
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
     public Object search(Pageable pageable,
                          @RequestBody(required = false) @Validated RoleDTO roleDTO,
                          @RequestParam(defaultValue = "false", required = false) boolean isPage) {
-        return roleService.pageByDTO(pageable, roleDTO, isPage, false);
+        return RestPageWrapper.wrap(roleService.pageByDTO(pageable, roleDTO, isPage, false), restWrapper);
     }
 
 
     @ResponseBody
     @RequestMapping(value = "/{roleId}", method = RequestMethod.GET)
-    public Role detail(@PathVariable Long roleId) {
-        return roleService.byPrimaryKey(roleId, false);
+    public Object detail(@PathVariable Long roleId) {
+        return restWrapper.wrap(roleService.byPrimaryKey(roleId, false));
     }
 
 
     @ResponseBody
     @RequestMapping(value = "/{roleId}/permissions", method = RequestMethod.GET)
-    public List<Permission> permissions(@PathVariable Long roleId) {
-        return roleService.permissions(roleId, false);
+    public Object permissions(@PathVariable Long roleId) {
+        return restWrapper.wrap(roleService.permissions(roleId, false));
     }
 
 
     @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
-    public void create(
+    public Object create(
         @Validated(RoleDTO.RoleCreateGroup.class) @RequestBody RoleDTO roleDTO
     ) {
-        roleService.create(roleDTO, new Date());
+        return restWrapper.wrap(roleService.create(roleDTO, new Date()));
     }
 
 
     @ResponseBody
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(value = "/{roleId}", method = RequestMethod.PUT)
-    public void update(
+    public Object update(
         @PathVariable Long roleId,
         @Validated(RoleDTO.RoleUpdateGroup.class) @RequestBody RoleDTO roleDTO
     ) {
-        roleService.update(roleId, roleDTO, new Date());
+        return restWrapper.wrap(roleService.update(roleId, roleDTO, new Date()));
     }
 
 
     @ResponseBody
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(value = "/{roleId}", method = RequestMethod.DELETE)
-    public void destroy(@PathVariable Long roleId) {
-        roleService.destroy(roleId, false);
+    public Object destroy(@PathVariable Long roleId) {
+        return restWrapper.wrap(roleService.destroy(roleId, false));
     }
 
 
