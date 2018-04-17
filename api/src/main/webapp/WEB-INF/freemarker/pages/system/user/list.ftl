@@ -7,22 +7,23 @@
         <h1>用户列表页面</h1>
     </div>
 
-    <div id="userList-toolbar" class="super-list-toolbar">
+    <div id="roleList-toolbar" class="super-list-toolbar super-table-search-wrapper">
         <div class="col-10">
-            <form id="userSearchForm" action="${root}/system/users" method="get" class="form-horizontal">
-
-                <div class="form-item">
-                    <label for="username" class="label-top">用户名：</label>
-                    <input id="username" type="text" class="easyui-textbox" name="username" data-options=""/>
+            <form id="roleSearchForm" action="${root}/system/roles" method="get" class="form-horizontal">
+                <div id="all" class="super-table-search">
+                    <div class="form-item">
+                        <label for="code" class="label-top">编码：</label>
+                        <input id="code" type="text" class="easyui-textbox" name="code" data-options=""/>
+                    </div>
+                    <div class="form-item">
+                        <label for="name" class="label-top">名称：</label>
+                        <input id="name" type="text" class="easyui-textbox" name="name" data-options=""/>
+                    </div>
                 </div>
                 <div class="form-item">
-                    <label for="name" class="label-top">姓名：</label>
-                    <input id="name" type="text" class="easyui-textbox" name="name" data-options=""/>
-                </div>
-
-                <div class="form-item">
+                    <a href="javascript:;" onclick="toggleMore()" id="more" class="easyui-linkbutton default" data-options="iconCls:'fa fa-compress'">展开</a>
                     <a href="javascript:;" onclick="searchForm()" class="easyui-linkbutton default" data-options="iconCls:'fa fa-search'">搜索</a>
-                    <a href="javascript:;" onclick="resetForm()" type="reset" class="easyui-linkbutton default" data-options="iconCls:'fa fa-search'">重置</a>
+                    <a href="javascript:;" onclick="resetForm()" type="reset" class="easyui-linkbutton default" data-options="iconCls:'fa fa-undo'">重置</a>
                 </div>
             </form>
         </div>
@@ -61,6 +62,24 @@
             function resetForm() {
                 $('#userSearchForm').form('reset');
                 $('#userList').datagrid('load', {});
+            }
+            function toggleMore() {
+                var $all = $('#all'),
+                        $more = $('#more'),
+                        $text = $more.find('.l-btn-text'),
+                        $icon = $more.find('.l-btn-icon.fa');
+                console.log($icon)
+                if ($all.hasClass("opened")) {
+                    $all.removeClass("opened");
+                    $text.text('展开');
+                    $icon.removeClass("fa-expand");
+                    $icon.addClass("fa-compress");
+                } else {
+                    $all.addClass("opened");
+                    $text.text('收缩');
+                    $icon.removeClass("fa-compress");
+                    $icon.addClass("fa-expand");
+                }
             }
 
             function formatOper(val,row,index){

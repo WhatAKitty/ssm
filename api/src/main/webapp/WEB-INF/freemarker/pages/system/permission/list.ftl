@@ -7,26 +7,27 @@
         <h1>权限列表页面</h1>
     </div>
 
-    <div id="permissionList-toolbar" class="super-list-toolbar">
+    <div id="permissionList-toolbar" class="super-list-toolbar super-table-search-wrapper">
         <div class="col-10">
             <form id="permissionSearchForm" action="${root}/system/permissions" method="get" class="form-horizontal">
-
-                <div class="form-item">
-                    <label for="code" class="label-top">权限编号：</label>
-                    <input id="code" type="text" class="easyui-textbox" name="code" data-options=""/>
+                <div id="all" class="super-table-search">
+                    <div class="form-item">
+                        <label for="code" class="label-top">权限编号：</label>
+                        <input id="code" type="text" class="easyui-textbox" name="code" data-options=""/>
+                    </div>
+                    <div class="form-item">
+                        <label for="name" class="label-top">权限名称：</label>
+                        <input id="name" type="text" class="easyui-textbox" name="name" data-options=""/>
+                    </div>
+                    <div class="form-item">
+                        <label for="category" class="label-top">权限分类：</label>
+                        <input id="category" type="text" class="easyui-textbox" name="category" data-options=""/>
+                    </div>
                 </div>
                 <div class="form-item">
-                    <label for="name" class="label-top">权限名称：</label>
-                    <input id="name" type="text" class="easyui-textbox" name="name" data-options=""/>
-                </div>
-                <div class="form-item">
-                    <label for="category" class="label-top">权限分类：</label>
-                    <input id="category" type="text" class="easyui-textbox" name="category" data-options=""/>
-                </div>
-
-                <div class="form-item">
+                    <a href="javascript:;" onclick="toggleMore()" id="more" class="easyui-linkbutton default" data-options="iconCls:'fa fa-compress'">展开</a>
                     <a href="javascript:;" onclick="searchForm()" class="easyui-linkbutton default" data-options="iconCls:'fa fa-search'">搜索</a>
-                    <a href="javascript:;" onclick="resetForm()" type="reset" class="easyui-linkbutton default" data-options="iconCls:'fa fa-search'">重置</a>
+                    <a href="javascript:;" onclick="resetForm()" type="reset" class="easyui-linkbutton default" data-options="iconCls:'fa fa-undo'">重置</a>
                 </div>
             </form>
         </div>
@@ -62,6 +63,24 @@
             function resetForm() {
                 $('#permissionSearchForm').form('reset');
                 $('#permissionList').datagrid('load', {});
+            }
+            function toggleMore() {
+                var $all = $('#all'),
+                    $more = $('#more'),
+                    $text = $more.find('.l-btn-text'),
+                    $icon = $more.find('.l-btn-icon.fa');
+                console.log($icon)
+                if ($all.hasClass("opened")) {
+                    $all.removeClass("opened");
+                    $text.text('展开');
+                    $icon.removeClass("fa-expand");
+                    $icon.addClass("fa-compress");
+                } else {
+                    $all.addClass("opened");
+                    $text.text('收缩');
+                    $icon.removeClass("fa-compress");
+                    $icon.addClass("fa-expand");
+                }
             }
 
             function formatOper(val,row,index){
