@@ -16,7 +16,7 @@
             <#if col.getDATA_TYPE() == 'Boolean'>
             <input class="easyui-switchbutton" [#if ${uncapitalizedClassName}.${col.getCamelColumnName()}]checked[/#if] data-options="disabled:true,onText:'开启',offText:'关闭'">
             <#else>
-            ${'$'}{${uncapitalizedClassName}.${col.getCamelColumnName()}}
+            ${'$'}{${uncapitalizedClassName}.${col.getCamelColumnName()}<#if col.isNullable()>!"-"</#if>}
             </#if>
         </div>
     </#if>

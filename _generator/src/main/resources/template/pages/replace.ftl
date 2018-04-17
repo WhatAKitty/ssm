@@ -11,11 +11,16 @@
         <#list schema.getKeys() as key>
             <#assign col = schema.get(key) />
             <#if !["id", "createDate", "modifyDate", "isDel"]?seq_contains(col.getCamelColumnName())>
-        <div class="form-item">
+        <div class="form-item" style="<#if col.isLongText()>width:100%;</#if>">
             <label for="${col.getCamelColumnName()}" class="label-top">${col.getCOLUMN_COMMENT()}：</label>
-            <input id="${col.getCamelColumnName()}" name="${col.getCamelColumnName()}" class="easyui-validatebox <#if col.getDATA_TYPE() == 'Boolean'>easyui-switchbutton<#else>easyui-textbox</#if>"
+            <input id="${col.getCamelColumnName()}"
+                   name="${col.getCamelColumnName()}" class="easyui-validatebox <#if col.getDATA_TYPE() == 'Boolean'>easyui-switchbutton<#else>easyui-textbox</#if>"
                    <#if col.getDATA_TYPE() != 'Boolean'>
                    prompt="请输入${col.getCOLUMN_COMMENT()}"
+                   </#if>
+                   <#if col.isLongText()>
+                   multiline="true"
+                   style="width:80%;height:120px"
                    </#if>
                    <#if col.getDATA_TYPE() == 'Boolean'>
                    [#if ${uncapitalizedClassName}??]
@@ -27,10 +32,10 @@
                    [/#if]
                    <#else>
                    [#if ${uncapitalizedClassName}??]
-                   value="${'$'}{${uncapitalizedClassName}.${col.getCamelColumnName()}}"
+                   value="${'$'}{${uncapitalizedClassName}.${col.getCamelColumnName()}<#if col.isNullable()>!""</#if>}"
                    [/#if]
                    </#if>
-                   data-options="required:true<#if col.getDATA_TYPE() == 'Boolean'>,onText:'开启',offText:'关闭',value:'[#if ${uncapitalizedClassName}??]${'$'}{${uncapitalizedClassName}.${col.getCamelColumnName()}?string('true', 'false')}[#else]true[/#if]'</#if>">
+                   data-options="<#if !col.isNullable()>required:true</#if><#if col.getDATA_TYPE() == 'Boolean'>,onText:'开启',offText:'关闭',value:'[#if ${uncapitalizedClassName}??]${'$'}{${uncapitalizedClassName}.${col.getCamelColumnName()}?string('true', 'false')}[#else]true[/#if]'</#if>">
         </div>
             </#if>
         </#list>

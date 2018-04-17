@@ -144,6 +144,15 @@ public class Schema implements Serializable {
         }
 
         /**
+         * 是否为长文本类型
+         *
+         * @return 长文本类型
+         */
+        public boolean isLongText() {
+            return this.DATA_TYPE.equalsIgnoreCase("text");
+        }
+
+        /**
          * 获取数据类型
          *
          * @return 数据类型
