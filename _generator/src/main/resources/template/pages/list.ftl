@@ -13,7 +13,7 @@
 
                 <#list schema.getKeys() as key>
                 <#assign col = schema.get(key) />
-                <#if !["id", "createDate", "modifyDate", "isDel"]?seq_contains(col.getCamelColumnName())>
+                <#if !["id", "createDate", "modifyDate", "isDel", "remark"]?seq_contains(col.getCamelColumnName())>
                 <div class="form-item">
                     <label for="${col.getCamelColumnName()}" class="label-top">${col.getCOLUMN_COMMENT()}：</label>
                     <input id="${col.getCamelColumnName()}" type="text" class="easyui-textbox" name="${col.getCamelColumnName()}" data-options=""/>
@@ -43,7 +43,7 @@
                     <th data-options="field:'ck',checkbox:true"></th>
                     <#list schema.getKeys() as key>
                     <#assign col = schema.get(key) />
-                    <#if !["id", "createDate", "modifyDate", "isDel"]?seq_contains(col.getCamelColumnName())>
+                    <#if !["id", "createDate", "modifyDate", "isDel", "remark"]?seq_contains(col.getCamelColumnName())>
                     <th data-options="field:'${col.getCamelColumnName()}',width:100,sortable:true">${col.getCOLUMN_COMMENT()}</th>
                     </#if>
                     </#list>
