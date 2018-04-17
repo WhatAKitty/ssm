@@ -340,21 +340,16 @@ public abstract class BusinessService<T extends IdEntity, D> extends BaseService
      */
     @Transactional(isolation = READ_COMMITTED)
     public T update(Long id, D d, boolean force, Date date, String... ignoreProperties) {
-        T t = newInstance();
-        t.setId(id);
-
         // 查询目标对象是否存在，如果标记强制更新则忽略软删除标记
-        if (t instanceof SDelEntity && !force) {
-            ((SDelEntity) t).setIsDel(false);
-        }
-        Asserts.isTrue(getMapper().selectCount(t) > 0, 400, String.format("不存在编号为%s的记录", id));
+        T old = byPrimaryKey(id, force);
+        Asserts.isTrue(old != null, 400, String.format("不存在编号为%s的记录", id));
 
         ignoreProperties = ArrayUtils.add(ignoreProperties, "id");
-        BeanUtils.copyProperties(d, t, ignoreProperties);
+        BeanUtils.copyProperties(d, old, ignoreProperties);
 
-        Asserts.isTrue(updateNotNull(t, date) == 1, 500, String.format("更新编号为%s的记录失败", id));
+        Asserts.isTrue(updateAll(old, date) == 1, 500, String.format("更新编号为%s的记录失败", id));
 
-        return t;
+        return old;
     }
 
     /**
