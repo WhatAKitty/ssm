@@ -1,4 +1,3 @@
-
 /** 布局 **/
 .col-2 {
     display: inline-block;
@@ -35,7 +34,7 @@
     min-height: 32px !important;
 }
 
-.form-horizontal > .form-item {
+.form-horizontal .form-item {
     display: inline-block;
 }
 
@@ -68,6 +67,7 @@
     border-bottom: 1px dotted #e2e2e2;
     padding: 7px 0px 16px;
 }
+
 .super-list-title-wrapper > h1 {
     padding: 0;
     margin: 0 8px;
@@ -75,11 +75,39 @@
     font-weight: lighter;
     color: #2679b5;
 }
+
 .super-list-toolbar {
     padding: 5px 0 15px;
     width: 100%;
 }
+
 .index-l {
     width: 100%;
     overflow: auto;
+}
+
+/** 搜索域 **/
+.super-table-search-wrapper {
+}
+
+.super-table-search-wrapper .form-item {
+    margin-bottom: 10px;
+}
+
+.super-table-search-wrapper .form-item,
+.super-table-search-wrapper .content-right {
+    vertical-align: top;
+}
+
+.super-table-search {
+    width: 70%;
+    display: inline-block;
+    vertical-align: middle;
+    overflow-y: hidden;
+    height: 32px;
+}
+
+.super-table-search.opened {
+    height: auto;
+    overflow-y: visible;
 }
