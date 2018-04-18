@@ -87,6 +87,14 @@ public class ${className}Controller {
 
 
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/{${uncapitalizedClassName}Id}", method = RequestMethod.GET)
+    public Object detail(@PathVariable("${uncapitalizedClassName}Id") Long ${uncapitalizedClassName}Id) {
+        return restWrapper.wrap(${uncapitalizedClassName}Service.byPrimaryKey(${uncapitalizedClassName}Id, false));
+    }
+
+
+    @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public Object create(@Validated({${className}DTO.${className}CreateGroup.class}) @RequestBody ${className}DTO ${uncapitalizedClassName}DTO) {
