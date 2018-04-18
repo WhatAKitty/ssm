@@ -83,7 +83,7 @@ public class RoleController {
     @RequestMapping(method = RequestMethod.GET)
     public Object search(Pageable pageable,
                          @Validated RoleDTO roleDTO,
-                         @RequestParam(defaultValue = "false", required = false) boolean isPage) {
+                         @RequestParam(defaultValue = "true", required = false) boolean isPage) {
         return RestPageWrapper.wrap(roleService.search(pageable, roleDTO, isPage, false), restWrapper);
     }
 

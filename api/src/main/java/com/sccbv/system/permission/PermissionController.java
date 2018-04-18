@@ -1,6 +1,7 @@
 package com.sccbv.system.permission;
 
 import com.whatakitty.ssm.dto.Pageable;
+import com.whatakitty.ssm.wrapper.RestPageWrapper;
 import com.whatakitty.ssm.wrapper.RestWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,8 +81,8 @@ public class PermissionController {
     @RequestMapping(method = RequestMethod.GET)
     public Object search(Pageable pageable,
                          PermissionDTO permissionDTO,
-                         @RequestParam(defaultValue = "false") Boolean isPage) {
-        return restWrapper.wrap(permissionService.search(pageable, permissionDTO, isPage, false));
+                         @RequestParam(defaultValue = "true") Boolean isPage) {
+        return RestPageWrapper.wrap(permissionService.search(pageable, permissionDTO, isPage, false), restWrapper);
     }
 
 

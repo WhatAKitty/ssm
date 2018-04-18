@@ -62,7 +62,7 @@ public class BookController {
     @RequestMapping(method = RequestMethod.GET)
     public Object list(Pageable pageable,
                        BookDTO bookDTO,
-                       @RequestParam(defaultValue = "false") Boolean isPage) {
+                       @RequestParam(defaultValue = "true") Boolean isPage) {
         return RestPageWrapper.wrap(bookService.search(pageable, bookDTO, isPage, false), restWrapper);
     }
 

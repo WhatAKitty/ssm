@@ -23,7 +23,22 @@ $.fn.progressbar.defaults.height = 18; //进度条
  * 重置datagrid loadFilter行为，不兼容返回类型为list的数据，需要返回page对象
  */
 $.fn.datagrid.defaults.loadFilter = function(data) {
-    return data && (data.list || []) || [];
+    if (data.rows && data.total) {
+        // raw data
+        return data;
+    } else if (data.list && data.totalRow) {
+        // spring mvc page response
+        return {
+            total: data.totalRow,
+            rows: data.list
+        }
+    } else {
+        console.error('不支持该格式的返回数据', data);
+        return {
+            total: 0,
+            rows: []
+        };
+    }
 };
 /**
  * 重置请求发送
