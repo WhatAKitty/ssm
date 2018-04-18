@@ -14,12 +14,50 @@ $.fn.combobox.defaults.height = 32;
 $.fn.passwordbox.defaults.height = 32;
 $.fn.filebox.defaults.height = 32;
 
-$.fn.menu.defaults.noline = true
+$.fn.menu.defaults.noline = true;
 $.fn.progressbar.defaults.height = 18; //进度条
+
+/**
+ * easyui default reset
+ *
+ * 重置datagrid loadFilter行为，不兼容返回类型为list的数据，需要返回page对象
+ */
+$.fn.datagrid.defaults.loadFilter = function(data) {
+    return data && (data.list || []) || [];
+};
+/**
+ * 重置请求发送
+ *
+ * @param param
+ * @param success
+ * @param error
+ * @returns {boolean}
+ */
+$.fn.datagrid.defaults.loader = function(param, success, error) {
+    var opts = $(this).datagrid('options');
+    if (!opts.url) {
+        return false;
+    }
+
+    $.ajax({
+        type: opts.method,
+        url: opts.url,
+        data: $.extend({}, param, {
+            size: param.rows
+        }),
+        dataType: 'json',
+        success: function(data) {
+            success(data);
+        },
+        error: function() {
+            error.apply(this, arguments);
+        }
+    })
+};
 
 $.parser.onComplete = function () {
     $("#index").css('opacity', 1);
-}
+};
 
 $(function () {
     /*左侧导航分类选中样式*/
