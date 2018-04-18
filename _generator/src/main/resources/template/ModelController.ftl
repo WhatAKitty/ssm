@@ -81,7 +81,7 @@ public class ${className}Controller {
     @RequestMapping(method = RequestMethod.GET)
     public Object list(Pageable pageable,
                          ${className}DTO ${uncapitalizedClassName}DTO,
-                         @RequestParam(defaultValue = "false") Boolean isPage) {
+                         @RequestParam(defaultValue = "true") Boolean isPage) {
         return RestPageWrapper.wrap(${uncapitalizedClassName}Service.search(pageable, ${uncapitalizedClassName}DTO, isPage, false), restWrapper);
     }
 
