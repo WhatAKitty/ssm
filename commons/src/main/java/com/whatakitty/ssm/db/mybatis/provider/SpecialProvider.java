@@ -26,6 +26,7 @@ public class SpecialProvider extends MapperTemplate {
      * 批量插入(使用自定义ID)
      *
      * @param ms ms
+     * @return
      */
     public String insertList(MappedStatement ms) {
         final Class<?> entityClass = getEntityClass(ms);
@@ -48,5 +49,22 @@ public class SpecialProvider extends MapperTemplate {
         sql.append("</foreach>");
         return sql.toString();
     }
+
+    /**
+     * 根据某些字段强制更新实体
+     *
+     * @param ms
+     * @return
+     */
+    @Deprecated
+    public String updateByPrimaryKeyWithProperties(MappedStatement ms) {
+        final Class<?> entityClass = getEntityClass(ms);
+        //开始拼sql
+        StringBuilder sql = new StringBuilder();
+        sql.append(SqlHelper.updateTable(entityClass, tableName(entityClass)));
+        sql.append(SqlHelper.updateSetColumns(entityClass, null, false, false));
+
+        return sql.toString();
+    };
 
 }

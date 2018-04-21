@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ssm</artifactId>
+        <artifactId>parent</artifactId>
         <groupId>com.whatakitty.ssm</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>dependencies</artifactId>
+    <version>${whatakitty.ssm.dependencies.version}</version>
     <packaging>pom</packaging>
-
     <name>dependencies</name>
 
     <properties>
@@ -50,6 +50,38 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- WhatAKitty SSM -->
+            <dependency>
+                <groupId>com.whatakitty.ssm</groupId>
+                <artifactId>parent</artifactId>
+                <version>${whatakitty.ssm.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.whatakitty.ssm</groupId>
+                <artifactId>dependencies</artifactId>
+                <version>${whatakitty.ssm.dependencies.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.whatakitty.ssm</groupId>
+                <artifactId>commons</artifactId>
+                <version>${whatakitty.ssm.commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.whatakitty.ssm</groupId>
+                <artifactId>biz</artifactId>
+                <version>${whatakitty.ssm.biz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.whatakitty.ssm</groupId>
+                <artifactId>api</artifactId>
+                <version>${whatakitty.ssm.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.whatakitty.ssm</groupId>
+                <artifactId>webapp</artifactId>
+                <version>${whatakitty.ssm.webapp.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>

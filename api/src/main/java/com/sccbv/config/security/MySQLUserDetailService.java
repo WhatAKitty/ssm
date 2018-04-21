@@ -61,7 +61,7 @@ public class MySQLUserDetailService implements UserDetailsService {
         }
 
         // get roles and permissions
-        Map<String, Object> userWithRoles = usersRolesService.byUserId(user.getId());
+        Map<String, Object> userWithRoles = usersRolesService.byUserId(user.getId(), false);
         List<Role> roles = List.class.cast(userWithRoles.get("roles"));
         if (roles.isEmpty()) {
             return toOAuth2User(user, Collections.emptyList());

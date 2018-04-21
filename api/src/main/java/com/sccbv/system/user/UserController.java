@@ -1,5 +1,7 @@
 package com.sccbv.system.user;
 
+import com.sccbv.system.role.RoleService;
+import com.sccbv.system.usersroles.UsersRolesService;
 import com.whatakitty.ssm.dto.Pageable;
 import com.whatakitty.ssm.wrapper.RestPageWrapper;
 import com.whatakitty.ssm.wrapper.RestWrapper;
@@ -8,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 用户资源接口
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     private final UserService userService;
+    private final RoleService roleService;
+    private final UsersRolesService usersRolesService;
     private final RestWrapper restWrapper;
 
     /**
@@ -29,49 +32,17 @@ public class UserController {
      * @param userService 用户服务
      */
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(
+        UserService userService,
+        RoleService roleService,
+        UsersRolesService usersRolesService
+    ) {
         this.userService = userService;
+        this.usersRolesService = usersRolesService;
+        this.roleService = roleService;
         this.restWrapper = RestWrapper
             .create("id", "username", "password", "name", "isExpired", "isLocked", "isEnabled")
             .addHandler("id", String::valueOf);
-    }
-
-
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String indexView() {
-        return "pages/system/user/list";
-    }
-
-
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public ModelAndView itemView(
-        @PathVariable("id") Long id,
-        ModelAndView modelAndView
-    ) {
-        User user = userService.byPrimaryKey(id, false);
-
-        modelAndView.setViewName("/pages/system/user/view");
-        modelAndView.addObject("user", user);
-        return modelAndView;
-    }
-
-
-    @RequestMapping(value = "/add/view", method = RequestMethod.GET)
-    public String addView() {
-        return "pages/system/user/replace";
-    }
-
-
-    @RequestMapping(value = "/edit/view/{id}", method = RequestMethod.GET)
-    public ModelAndView editView(
-        @PathVariable("id") Long id,
-        ModelAndView modelAndView
-    ) {
-        User user = userService.byPrimaryKey(id, false);
-
-        modelAndView.setViewName("/pages/system/user/replace");
-        modelAndView.addObject("user", user);
-        return modelAndView;
     }
 
 
@@ -79,9 +50,17 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
     public Object list(Pageable pageable,
-                         UserDTO userDTO,
-                         @RequestParam(defaultValue = "false") Boolean isPage) {
+                       UserDTO userDTO,
+                       @RequestParam(defaultValue = "true") Boolean isPage) {
         return RestPageWrapper.wrap(userService.search(pageable, userDTO, isPage, false), restWrapper);
+    }
+
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public Object detail(@PathVariable("userId") Long userId) {
+        return restWrapper.wrap(userService.byPrimaryKey(userId, false));
     }
 
 

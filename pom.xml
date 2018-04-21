@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.whatakitty.ssm</groupId>
-    <artifactId>ssm</artifactId>
-    <version>${ssm.version}</version>
+    <artifactId>parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>ssm</name>
@@ -13,7 +13,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>1.8</jdk.version>
-        <ssm.version>1.0-SNAPSHOT</ssm.version>
+
+        <whatakitty.ssm.parent.version>1.0-SNAPSHOT</whatakitty.ssm.parent.version>
+        <whatakitty.ssm.dependencies.version>1.0-SNAPSHOT</whatakitty.ssm.dependencies.version>
+        <whatakitty.ssm.commons.version>1.0-SNAPSHOT</whatakitty.ssm.commons.version>
+        <whatakitty.ssm.biz.version>1.0-SNAPSHOT</whatakitty.ssm.biz.version>
+        <whatakitty.ssm.api.version>1.0-SNAPSHOT</whatakitty.ssm.api.version>
+        <whatakitty.ssm.webapp.version>1.0-SNAPSHOT</whatakitty.ssm.webapp.version>
+        <whatakitty.ssm.generator.version>1.0-SNAPSHOT</whatakitty.ssm.generator.version>
     </properties>
 
     <modules>
@@ -21,6 +28,8 @@
         <module>dependencies</module>
         <module>commons</module>
         <module>api</module>
+        <module>biz</module>
+        <module>webapp</module>
     </modules>
 
     <build>
@@ -33,6 +42,26 @@
                     <target>${jdk.version}</target>
                     <source>${jdk.version}</source>
                 </configuration>
+            </plugin>
+            <!--JRebel的配置-->
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+                <version>1.1.7</version>
+                <configuration>
+                    <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
+                    <alwaysGenerate>true</alwaysGenerate>
+                    <showGenerated>true</showGenerated>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

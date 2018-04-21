@@ -1,6 +1,6 @@
 package ${packageName}.${moduleName}.${uncapitalizedClassName};
 
-import com.sccbv.config.db.MyMapper;
+import com.sccbv.db.MyMapper;
 
 /**
  * ${funcName}数据操作类
