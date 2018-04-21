@@ -26,20 +26,20 @@
 
 ## Framework Structure
 ssm
-|
-|___ dependencies  项目包依赖管理
-|
-|___ commons       通用代码
-|
-|___ biz           业务代码
-|
-|___ api           接口模块
-|
-|___ webapp        页面渲染相关模块
-|
-|___ _generator    代码生成模块
-|
-|___ doc           文档文件夹(包含SQL)
+|  
+|___ dependencies  项目包依赖管理  
+|  
+|___ commons       通用代码  
+|  
+|___ biz           业务代码  
+|  
+|___ api           接口模块  
+|  
+|___ webapp        页面渲染相关模块  
+|  
+|___ generator    代码生成模块  
+|  
+|___ doc           文档文件夹(包含SQL)  
 
 ## Usage
 
