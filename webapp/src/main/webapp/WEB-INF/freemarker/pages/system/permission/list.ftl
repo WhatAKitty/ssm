@@ -32,7 +32,7 @@
             </form>
         </div>
         <div class="col-2 content-right">
-            <a id="addBtn" href="${root}/system/permissions-vew/add" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a>
+            <a id="addBtn" href="${root}/system/permissions-view/add" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a>
         </div>
     </div>
     <div class="index-l">
