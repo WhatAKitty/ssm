@@ -132,7 +132,7 @@ public class RolesPermissionsService extends BusinessService<RolesPermissions, R
         BeanUtils.copyProperties(rolesPermissionsDTO, roleDTO);
         roleService.update(roleId, roleDTO, new Date());
 
-        Example example = Example.builder(UsersRoles.class).build();
+        Example example = Example.builder(RolesPermissions.class).build();
         example.and().andEqualTo("roleId", roleId);
 
         List<RolesPermissions> rolesPermissionsList = selectByExample(example);
@@ -143,7 +143,7 @@ public class RolesPermissionsService extends BusinessService<RolesPermissions, R
         for (Long permissionId : permissionIdList) {
             boolean isExist = false;
             for (RolesPermissions rolesPermissions : rolesPermissionsList) {
-                if (rolesPermissions.getRoleId().equals(roleId)) {
+                if (rolesPermissions.getPermissionId().equals(permissionId)) {
                     sameList.add(rolesPermissions);
                     isExist = true;
                     break;
