@@ -30,6 +30,6 @@ public class RolesPermissionsValidator implements ConstraintValidator<RolesPermi
             return false;
         }
 
-        return false;
+        return true;
     }
 }

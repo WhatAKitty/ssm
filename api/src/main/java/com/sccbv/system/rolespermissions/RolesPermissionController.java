@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @description
  **/
 @Controller
-@RequestMapping(value = "/roles-permissions")
+@RequestMapping(value = "/system/roles-permissions")
 public class RolesPermissionController {
 
     @Autowired

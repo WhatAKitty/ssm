@@ -16,7 +16,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class RolesPermissionsDTO {
 
     @NotEmpty(
-        groups = RolesPermissionsUpdateGroup.class,
+            groups = {RolesPermissionsCreateGroup.class, RolesPermissionsUpdateGroup.class},
+            message = "error.message.RolesPermissionsDTO.code.empty"
+    )
+    private String code;
+
+    @NotEmpty(
+        groups = {RolesPermissionsCreateGroup.class, RolesPermissionsUpdateGroup.class},
         message = "error.message.RolesPermissionsDTO.name.empty"
     )
     private String name;
