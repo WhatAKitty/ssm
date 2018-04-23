@@ -1,8 +1,8 @@
-package com.sccbv.db;
+package com.whatakitty.ssm.db;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.pagehelper.PageInterceptor;
-import com.whatakitty.ssm.db.DruidDataSourcePool;
+import com.whatakitty.ssm.db.mybatis.SsmVFS;
 import java.sql.SQLException;
 import java.util.Properties;
 import org.apache.ibatis.plugin.Interceptor;
@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import tk.mybatis.mapper.code.Style;
+import tk.mybatis.mapper.entity.Config;
 import tk.mybatis.mapper.mapperhelper.MapperHelper;
 import tk.mybatis.spring.annotation.MapperScan;
 
@@ -26,20 +28,12 @@ import tk.mybatis.spring.annotation.MapperScan;
  **/
 @Configuration
 @MapperScan(
-    basePackages = {"com.sccbv.demo", "com.sccbv.system", "com.sccbv.business"},
+    basePackages = "com.sccbv",
+    markerInterface = MyMapper.class,
     properties = {
-        "notEmpty=true",
-        "IDENTITY=MYSQL",
-        "style=camelhumpAndLowercase",
-        "enableMethodAnnotation=true",
-        "useSimpleType=true",
-        "usePrimitiveType=true",
-        "enumAsSimpleType=true",
-        "simpleTypes=com.whatakitty.ssm.enums.ValueEnum",
-        "checkExampleEntityClass=true",
-        "safeDelete=true",
-        "safeUpdate=true"
-    }
+        "simpleTypes=com.whatakitty.ssm.enums.ValueEnum"
+    },
+    sqlSessionFactoryRef = "sqlSessionFactory"
 )
 public class MyBatisConfiguration {
 
@@ -53,8 +47,20 @@ public class MyBatisConfiguration {
 
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
+        Config config = new Config();
+        config.setNotEmpty(true);
+        config.setIDENTITY("MYSQL");
+        config.setStyle(Style.camelhumpAndLowercase);
+        config.setEnableMethodAnnotation(true);
+        config.setEnumAsSimpleType(true);
+        config.setCheckExampleEntityClass(true);
+        config.setSafeDelete(true);
+        config.setSafeUpdate(true);
+        MapperHelper mapperHelper = new MapperHelper();
+        mapperHelper.setConfig(config);
+
         tk.mybatis.mapper.session.Configuration configuration = new tk.mybatis.mapper.session.Configuration();
-        configuration.setMapperHelper(new MapperHelper());
+        configuration.setMapperHelper(mapperHelper);
 
         Properties properties = new Properties();
         properties.setProperty("dialect", "");
@@ -70,6 +76,7 @@ public class MyBatisConfiguration {
         sessionFactory.setConfiguration(configuration);
         sessionFactory.setPlugins(new Interceptor[] {pageInterceptor});
         sessionFactory.setMapperLocations(resources);
+        sessionFactory.setVfs(SsmVFS.class);
         return sessionFactory.getObject();
     }
 

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
@@ -200,7 +201,7 @@ public abstract class Asserts {
      * @param message   异常信息
      */
     public static void isAssignable(Class<?> superType, Class<?> subType, Integer code, String message) {
-        if (superType == null || subType == null || !superType.isAssignableFrom(subType)) {
+        if (superType == null || subType == null || !ClassUtils.isAssignable(superType, subType)) {
             throw new BusinessException(code, message);
         }
     }

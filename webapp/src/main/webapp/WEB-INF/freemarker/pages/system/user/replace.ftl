@@ -7,7 +7,7 @@
         <h1>用户[#if user??]编辑[#else]增加[/#if]页面</h1>
     </div>
 
-    <form id="user[#if user??]Edit[#else]Add[/#if]Form" action="${root}/system/users[#if user??]/${user.id}[/#if]" method="[#if user??]put[#else]post[/#if]" class="super-form-page">
+    <form id="user[#if user??]Edit[#else]Add[/#if]Form" action="${root}/system/users-roles[#if user??]/${user.id}[/#if]" method="[#if user??]put[#else]post[/#if]" class="super-form-page">
         <div class="form-item">
             <label for="username" class="label-top">用户名：</label>
             <input id="username" name="username" class="easyui-validatebox easyui-textbox"
@@ -55,7 +55,7 @@
             <legend>用户角色选择</legend>
             <ul class="checkbox-group">
                 [#list roles as role]
-                <li><label><input type="checkbox" name="roles" value="${role.id}" [#if userRoles??][#if userRoles?seq_contains(role.id)]checked[/#if][/#if] />${role.name}</label></li>
+                <li><label><input type="checkbox" name="roleIdList" value="${role.id}" [#if userRoles??][#if userRoles?seq_contains(role.id)]checked[/#if][/#if] />${role.name}</label></li>
                 [/#list]
             </ul>
         </fieldset>
@@ -70,11 +70,11 @@
     <script>
         $(function() {
             $('#user[#if user??]Edit[#else]Add[/#if]Form').ajaxForm('[#if user??]PUT[#else]POST[/#if]', function() {
-                window.location.href = "${root}/system/users/view";
+                window.location.href = "${root}/system/users-view";
             }, null, function(data) {
                 // 如果解析为单个，则转化为数组
-                if (!data.roles.push) {
-                    data.roles = [data.roles];
+                if (!data.roleIdList.push) {
+                    data.roleIdList = [data.roleIdList];
                 }
                 return data;
             });

@@ -1,6 +1,6 @@
 package com.sccbv.system.conf;
 
-import com.sccbv.db.MyMapper;
+import com.whatakitty.ssm.db.MyMapper;
 
 /**
  * 系统配置数据操作类

@@ -1,6 +1,6 @@
 package ${packageName}.${moduleName}.${uncapitalizedClassName};
 
-import com.sccbv.db.MyMapper;
+import com.whatakitty.ssm.db.MyMapper;
 
 /**
  * ${funcName}数据操作类

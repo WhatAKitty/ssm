@@ -1,6 +1,6 @@
 package com.sccbv.demo;
 
-import com.sccbv.db.MyMapper;
+import com.whatakitty.ssm.db.MyMapper;
 
 /**
  * 图书数据操作类

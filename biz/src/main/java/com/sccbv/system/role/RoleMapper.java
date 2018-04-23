@@ -1,6 +1,6 @@
 package com.sccbv.system.role;
 
-import com.sccbv.db.MyMapper;
+import com.whatakitty.ssm.db.MyMapper;
 import com.sccbv.system.permission.Permission;
 import java.util.List;
 

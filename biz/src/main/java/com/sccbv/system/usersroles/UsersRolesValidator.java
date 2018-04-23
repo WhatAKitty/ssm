@@ -29,9 +29,7 @@ public class UsersRolesValidator implements ConstraintValidator<UsersRolesValida
         if (StringUtils.isBlank(usersRolesDTO.getUsername())
             || StringUtils.isBlank(usersRolesDTO.getPassword())
             || StringUtils.isBlank(usersRolesDTO.getName())
-            || usersRolesDTO.getIsEnabled() == null
-            || usersRolesDTO.getIsExpired() == null
-            || usersRolesDTO.getIsLocked() == null) {
+            || usersRolesDTO.getIsEnabled() == null) {
             return false;
         }
 

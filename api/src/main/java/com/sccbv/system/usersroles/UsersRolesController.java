@@ -32,7 +32,7 @@ public class UsersRolesController {
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
-    public Object create(@Validated(UsersRolesDTO.UsersRolesCreateGroup.class) UsersRolesDTO usersRolesDTO) {
+    public Object create(@Validated(UsersRolesDTO.UsersRolesCreateGroup.class) @RequestBody UsersRolesDTO usersRolesDTO) {
         return usersRolesService.create(usersRolesDTO);
     }
 
@@ -40,7 +40,8 @@ public class UsersRolesController {
     @ResponseBody
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-    public Object update(@PathVariable Long userId, @Validated(UsersRolesDTO.UsersRolesUpdateGroup.class) UsersRolesDTO usersRolesDTO) {
+    public Object update(@PathVariable Long userId,
+                         @Validated(UsersRolesDTO.UsersRolesUpdateGroup.class) @RequestBody UsersRolesDTO usersRolesDTO) {
         return usersRolesService.update(usersRolesDTO, userId);
     }
 

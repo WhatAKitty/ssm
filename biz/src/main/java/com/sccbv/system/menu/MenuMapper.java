@@ -1,7 +1,7 @@
 package com.sccbv.system.menu;
 
 
-import com.sccbv.db.MyMapper;
+import com.whatakitty.ssm.db.MyMapper;
 
 /**
  * 菜单数据操作类

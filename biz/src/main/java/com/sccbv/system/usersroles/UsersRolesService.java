@@ -45,7 +45,7 @@ public class UsersRolesService extends BusinessService<UsersRoles, UsersRolesDTO
      * 通过用户编码查询用户及其角色信息
      *
      * @param userId 用户编码
-     * @param force 是否强制
+     * @param force  是否强制
      * @return 用户及其角色信息
      */
     public Map<String, Object> byUserId(Long userId, boolean force) {
@@ -76,9 +76,8 @@ public class UsersRolesService extends BusinessService<UsersRoles, UsersRolesDTO
             BeanUtils.copyProperties(usersRolesDTO, userDTO);
 
             Long id = getIdGenerate().getNextValue();
-            userDTO.setId(id);
             usersRolesDTO.setUserId(id);
-
+            userDTO.setId(id);
             userService.create(userDTO);
         } else {
             Asserts.isTrue(userService.existsByPrimaryKey(
@@ -93,12 +92,14 @@ public class UsersRolesService extends BusinessService<UsersRoles, UsersRolesDTO
             return usersRolesDTO;
         }
 
-        List<UsersRolesDTO> usersRolesDTOList = roleIdList.parallelStream().map(roleId -> {
-            UsersRolesDTO temp = new UsersRolesDTO();
-            temp.setUserId(usersRolesDTO.getUserId());
-            temp.setRoleId(roleId);
-            return temp;
-        }).collect(Collectors.toList());
+        List<UsersRolesDTO> usersRolesDTOList = roleIdList
+            .parallelStream()
+            .map(roleId -> {
+                UsersRolesDTO temp = new UsersRolesDTO();
+                temp.setUserId(usersRolesDTO.getUserId());
+                temp.setRoleId(roleId);
+                return temp;
+            }).collect(Collectors.toList());
 
         if (!usersRolesDTOList.isEmpty()) {
             batchCreate(usersRolesDTOList, date);

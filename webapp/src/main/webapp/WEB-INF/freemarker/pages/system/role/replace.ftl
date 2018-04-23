@@ -51,7 +51,7 @@
     <script>
         $(function() {
             $('#role[#if role??]Edit[#else]Add[/#if]Form').ajaxForm('[#if role??]PUT[#else]POST[/#if]', function() {
-                window.location.href = "${root}/system/roles/view";
+                window.location.href = "${root}/system/roles-view";
             });
         });
     </script>

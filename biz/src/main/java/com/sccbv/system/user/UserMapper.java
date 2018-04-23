@@ -1,6 +1,6 @@
 package com.sccbv.system.user;
 
-import com.sccbv.db.MyMapper;
+import com.whatakitty.ssm.db.MyMapper;
 
 /**
  * 用户数据操作类

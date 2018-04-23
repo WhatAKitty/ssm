@@ -1,6 +1,6 @@
 package com.sccbv.system.permission;
 
-import com.sccbv.db.MyMapper;
+import com.whatakitty.ssm.db.MyMapper;
 
 /**
  * 系统权限数据操作层

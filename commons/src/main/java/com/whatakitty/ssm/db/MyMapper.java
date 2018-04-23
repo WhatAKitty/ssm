@@ -1,4 +1,4 @@
-package com.sccbv.db;
+package com.whatakitty.ssm.db;
 
 import tk.mybatis.mapper.annotation.RegisterMapper;
 import tk.mybatis.mapper.common.IdsMapper;

@@ -29,24 +29,6 @@ $(function () {
                 o[this.name] = this.value || '';
             }
         });
-        var $radio = $('input[type=radio],input[type=checkbox]', this);
-        $.each($radio, function () {
-            if (!o.hasOwnProperty(this.name)) {
-                // o[this.name] = this.value || '';
-                if (o[this.name]) {
-                    if (!o[this.name].push) {
-                        o[this.name] = [o[this.name]];
-                    }
-                    o[this.name].push(this.value || '');
-                } else {
-                    o[this.name] = this.value || '';
-                }
-            } else if (!o[this.name].push) {
-                console.log('存在原有值', o[this.name]);
-                // 存在原有值，并且非数组
-                o[this.name] = [o[this.name]];
-            }
-        });
         return o;
     };
 
@@ -125,7 +107,7 @@ $(function () {
             $btn.linkbutton('disable');
 
             var action = $form.attr("action");
-            var data = $form.serializeJSON();
+            var data = $form.serializeObject();
 
             for (var item in data) {
                 if (data[item] === "" || "undefined" === typeof data[item]) delete data[item];

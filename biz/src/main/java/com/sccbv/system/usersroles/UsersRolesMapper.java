@@ -1,6 +1,6 @@
 package com.sccbv.system.usersroles;
 
-import com.sccbv.db.MyMapper;
+import com.whatakitty.ssm.db.MyMapper;
 import com.sccbv.system.role.Role;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;

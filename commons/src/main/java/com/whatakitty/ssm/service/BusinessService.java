@@ -3,22 +3,22 @@ package com.whatakitty.ssm.service;
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 
 import com.whatakitty.ssm.asserts.Asserts;
+import com.whatakitty.ssm.db.MyMapper;
 import com.whatakitty.ssm.db.mybatis.BaseEntity;
 import com.whatakitty.ssm.db.mybatis.IdEntity;
 import com.whatakitty.ssm.db.mybatis.SDelEntity;
 import com.whatakitty.ssm.dto.Pageable;
-import com.whatakitty.ssm.utils.IdGenerate;
+import com.whatakitty.ssm.utils.BeanUtils;
 import com.whatakitty.ssm.utils.BusinessIdsUtils;
+import com.whatakitty.ssm.utils.IdGenerate;
 import java.util.Date;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.ibatis.session.RowBounds;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 
 /**
@@ -30,7 +30,7 @@ import tk.mybatis.mapper.entity.Example;
  * @date 2018/01/09
  * @description
  **/
-public abstract class BusinessService<T extends IdEntity, D> extends BaseService<T> {
+public abstract class BusinessService<T extends IdEntity, D> extends BaseService<T, MyMapper<T>> {
 
     private final Class<T> clazz;
     private final BusinessIdsUtils<T> businessIdsUtils;
@@ -44,7 +44,7 @@ public abstract class BusinessService<T extends IdEntity, D> extends BaseService
      *
      * @param mapper 数据库操作实例
      */
-    public BusinessService(Mapper<T> mapper, Class<T> clazz) {
+    public BusinessService(MyMapper<T> mapper, Class<T> clazz) {
         super(mapper);
         this.clazz = clazz;
         this.businessIdsUtils = new BusinessIdsUtils<>(mapper);
@@ -345,7 +345,7 @@ public abstract class BusinessService<T extends IdEntity, D> extends BaseService
         Asserts.isTrue(old != null, 400, String.format("不存在编号为%s的记录", id));
 
         ignoreProperties = ArrayUtils.add(ignoreProperties, "id");
-        BeanUtils.copyProperties(d, old, ignoreProperties);
+        BeanUtils.copyNoneNullProperties(d, old, ignoreProperties);
 
         Asserts.isTrue(updateAll(old, date) == 1, 500, String.format("更新编号为%s的记录失败", id));
 

@@ -16,16 +16,16 @@ import tk.mybatis.mapper.common.Mapper;
  * @author xuqiang
  * @date 2017/6/11
  */
-public abstract class BaseService<T> {
+public abstract class BaseService<T, M extends Mapper<T>> {
 
-    private final Mapper<T> mapper;
+    private final M mapper;
 
     /**
      * 初始化基础业务组件
      *
      * @param mapper 数据库操作实例
      */
-    public BaseService(Mapper<T> mapper) {
+    public BaseService(M mapper) {
         this.mapper = mapper;
     }
 

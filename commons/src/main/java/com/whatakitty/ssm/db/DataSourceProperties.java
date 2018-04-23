@@ -1,4 +1,4 @@
-package com.sccbv.db;
+package com.whatakitty.ssm.db;
 
 import com.whatakitty.ssm.db.BaseDataSourceProperties;
 import org.springframework.context.annotation.Configuration;

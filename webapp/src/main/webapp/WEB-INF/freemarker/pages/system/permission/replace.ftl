@@ -61,7 +61,7 @@
     <script>
         $(function() {
             $('#permission[#if permission??]Edit[#else]Add[/#if]Form').ajaxForm('[#if permission??]PUT[#else]POST[/#if]', function() {
-                window.location.href = "${root}/system/permissions/view";
+                window.location.href = "${root}/system/permissions-view";
             });
         });
     </script>

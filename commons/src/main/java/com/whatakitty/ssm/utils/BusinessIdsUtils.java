@@ -1,14 +1,13 @@
 package com.whatakitty.ssm.utils;
 
 import com.whatakitty.ssm.asserts.Asserts;
+import com.whatakitty.ssm.db.MyMapper;
 import com.whatakitty.ssm.db.mybatis.IdEntity;
-import com.whatakitty.ssm.db.mybatis.mapper.InsertListMapper;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.IntStream;
-import tk.mybatis.mapper.common.Mapper;
 
 /**
  * 业务数据批处理工具
@@ -20,9 +19,9 @@ import tk.mybatis.mapper.common.Mapper;
  **/
 public class BusinessIdsUtils<T extends IdEntity> {
 
-    private final Mapper<T> mapper;
+    private final MyMapper mapper;
 
-    public BusinessIdsUtils(Mapper<T> mapper) {
+    public BusinessIdsUtils(MyMapper mapper) {
         this.mapper = mapper;
     }
 
@@ -38,10 +37,8 @@ public class BusinessIdsUtils<T extends IdEntity> {
      * @return 列表
      */
     public List<T> batchInsert(List<? extends Object> dtos, Date date, Function<Integer, T> f) {
-        Asserts.isAssignable(InsertListMapper.class, mapper.getClass(), 500, "并不支持批量保存功能，请先继承InsertListMapper");
-
         final ArrayList<T> ts = new ArrayList<>();
-        int result = ((InsertListMapper) mapper).insertList(
+        int result = mapper.insertList(
             IntStream.range(0, dtos.size()).collect(() -> ts, (list, i) -> {
                 final T t = f.apply(i);
                 list.add(t);

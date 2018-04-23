@@ -33,8 +33,8 @@ public class UserService extends BusinessService<User, UserDTO> {
     /**
      * 检查用户是否有效
      *
-     * @param userDTO 用户信息
-     * @param excludeId   排除的用户
+     * @param userDTO   用户信息
+     * @param excludeId 排除的用户
      */
     public void valid(UserDTO userDTO, Long excludeId) {
         Example example = Example.builder(User.class).build();
