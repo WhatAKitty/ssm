@@ -50,7 +50,7 @@
     <script>
         $(function() {
             $('#${uncapitalizedClassName}[#if ${uncapitalizedClassName}??]Edit[#else]Add[/#if]Form').ajaxForm('[#if ${uncapitalizedClassName}??]PUT[#else]POST[/#if]', function() {
-                window.location.href = "${'$'}{root}/${moduleName}/${classNames}/view";
+                window.location.href = "${'$'}{root}/${moduleName}/${classNames}-view";
             });
         });
     </script>

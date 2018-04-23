@@ -29,7 +29,7 @@
             </form>
         </div>
         <div class="col-2 content-right">
-            <a id="addBtn" href="${'$'}{root}/${moduleName}/${classNames}/add/view" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a>
+            <a id="addBtn" href="${'$'}{root}/${moduleName}/${classNames}-view/add" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a>
         </div>
     </div>
     <div class="index-l">
@@ -84,9 +84,9 @@
             }
 
             function formatOper(val,row,index){
-                return '<a href="${'$'}{root}/${moduleName}/${classNames}/view/' + row.id + '">查看</a>' +
+                return '<a href="${'$'}{root}/${moduleName}/${classNames}-view/' + row.id + '">查看</a>' +
                         '&nbsp;|&nbsp;' +
-                        '<a href="${'$'}{root}/${moduleName}/${classNames}/edit/view/' + row.id + '">修改</a>' +
+                        '<a href="${'$'}{root}/${moduleName}/${classNames}-view/edit/' + row.id + '">修改</a>' +
                         '&nbsp;|&nbsp;' +
                         '<a href="javascript:;" onclick="deleteRow(' + row.id + ', ' + index + ')">删除</a>';
             }
