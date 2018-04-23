@@ -20,7 +20,9 @@
         <spring.version>3.2.18.RELEASE</spring.version>
         <spring.security.version>3.2.10.RELEASE</spring.security.version>
         <spring.taglibs.version>3.2.10.RELEASE</spring.taglibs.version>
-        <mybatis.version>3.3.0</mybatis.version>
+        <aspectj.version>1.8.13</aspectj.version>
+        <cglib.version>3.2.6</cglib.version>
+        <mybatis.version>3.4.6</mybatis.version>
         <mybatis.spring.version>1.3.2</mybatis.spring.version>
         <mapper-core.version>1.0.1</mapper-core.version>
         <mapper-base.version>1.0.0</mapper-base.version>
@@ -195,6 +197,29 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-aspects</artifactId>
                 <version>${spring.security.version}</version>
+            </dependency>
+
+
+            <!-- Spring aop cglib -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
             </dependency>
 
 
