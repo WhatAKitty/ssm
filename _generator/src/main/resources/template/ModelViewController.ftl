@@ -1,7 +1,7 @@
 package ${packageName}.webapp.${moduleName}.${uncapitalizedClassName};
 
-import ${packageName}.${moduleName}.${uncapitalizedClassName}.${classNames};
-import ${packageName}.${moduleName}.${uncapitalizedClassName}.${classNames}Service;
+import ${packageName}.${moduleName}.${uncapitalizedClassName}.${className};
+import ${packageName}.${moduleName}.${uncapitalizedClassName}.${className}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
  **/
 @Controller
 @RequestMapping("/system/${uncapitalizedClassName}-view")
-public class ${classNames}ViewController {
+public class ${className}ViewController {
 
-    private final ${classNames}Service ${uncapitalizedClassName}Service;
+    private final ${className}Service ${uncapitalizedClassName}Service;
 
     /**
      * 初始化权限Controller层
