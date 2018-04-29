@@ -28,7 +28,7 @@ public class ${className}ViewController {
      * @param ${uncapitalizedClassName}Service ${funcName}服务
      */
     @Autowired
-    public ${classNames}ViewController(${classNames}Service ${uncapitalizedClassName}Service) {
+    public ${className}ViewController(${className}Service ${uncapitalizedClassName}Service) {
         this.${uncapitalizedClassName}Service = ${uncapitalizedClassName}Service;
     }
 
