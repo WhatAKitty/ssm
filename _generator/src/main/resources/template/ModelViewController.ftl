@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @description
  **/
 @Controller
-@RequestMapping("/system/${classNames}-view")
+@RequestMapping("/${moduleName}/${classNames}-view")
 public class ${className}ViewController {
 
     private final ${className}Service ${uncapitalizedClassName}Service;
