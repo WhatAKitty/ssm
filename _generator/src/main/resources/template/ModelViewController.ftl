@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @description
  **/
 @Controller
-@RequestMapping("/system/${uncapitalizedClassName}-view")
+@RequestMapping("/system/${classNames}-view")
 public class ${className}ViewController {
 
     private final ${className}Service ${uncapitalizedClassName}Service;
@@ -52,13 +52,13 @@ public class ${className}ViewController {
     }
 
 
-    @RequestMapping(value = "/add/view", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addView() {
         return "pages/${moduleName}/${uncapitalizedClassName}/replace";
     }
 
 
-    @RequestMapping(value = "/edit/view/{${uncapitalizedClassName}Id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{${uncapitalizedClassName}Id}", method = RequestMethod.GET)
     public ModelAndView editView(
         @PathVariable("${uncapitalizedClassName}Id") Long ${uncapitalizedClassName}Id,
         ModelAndView modelAndView
