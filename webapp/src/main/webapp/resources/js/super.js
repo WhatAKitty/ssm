@@ -22,7 +22,7 @@ $.fn.progressbar.defaults.height = 18; //进度条
  *
  * 重置datagrid loadFilter行为，不兼容返回类型为list的数据，需要返回page对象
  */
-$.fn.datagrid.defaults.loadFilter = function(data) {
+$.fn.datagrid.defaults.loadFilter = function (data) {
     if (data.rows && data.total) {
         // raw data
         return data;
@@ -48,7 +48,7 @@ $.fn.datagrid.defaults.loadFilter = function(data) {
  * @param error
  * @returns {boolean}
  */
-$.fn.datagrid.defaults.loader = function(param, success, error) {
+$.fn.datagrid.defaults.loader = function (param, success, error) {
     var opts = $(this).datagrid('options');
     if (!opts.url) {
         return false;
@@ -61,13 +61,65 @@ $.fn.datagrid.defaults.loader = function(param, success, error) {
             size: param.rows
         }),
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             success(data);
         },
-        error: function() {
+        error: function () {
             error.apply(this, arguments);
         }
     })
+};
+
+/**
+ * 支持TreeGrid/ComboTree/ComboTreeGrid树结构
+ *
+ * @param data
+ * @param parentId
+ * @returns {*}
+ */
+function supportSimpleTree(opts, data, parentId) {
+
+    if (!opts.parentField) {
+        return data;
+    }
+
+    var idField = opts.idField || 'id';
+    var treeField = opts.treeField || 'text';
+    var parentField = opts.parentField;
+
+    var i,
+        l,
+        treeData = [],
+        tmpMap = [];
+
+    for (i = 0, l = data.length; i < l; i++) {
+        tmpMap[data[i][idField]] = data[i];
+    }
+
+    for (i = 0, l = data.length; i < l; i++) {
+        if (tmpMap[data[i][parentField]] && data[i][idField] != data[i][parentField]) {
+            if (!tmpMap[data[i][parentField]]['children'])
+                tmpMap[data[i][parentField]]['children'] = [];
+            data[i]['text'] = data[i][treeField];
+            tmpMap[data[i][parentField]]['children'].push(data[i]);
+        } else {
+            data[i]['text'] = data[i][treeField];
+            treeData.push(data[i]);
+        }
+    }
+    return treeData;
+};
+$.fn.treegrid.defaults.loadFilter = function (data, parentId) {
+    var opts = $(this).treegrid('options');
+    return supportSimpleTree(opts, data, parentId);
+};
+$.fn.combotree.defaults.loadFilter = function (data, parentId) {
+    var opts = $(this).tree('options');
+    return supportSimpleTree(opts, data, parentId);
+};
+$.fn.combotreegrid.defaults.loadFilter = function (data, parentId) {
+    var opts = $(this).combotreegrid('options');
+    return supportSimpleTree(opts, data, parentId);
 };
 
 $.parser.onComplete = function () {
@@ -87,8 +139,8 @@ $(function () {
         if ($("#tt").tabs('exists', tabTitle)) {
             $("#tt").tabs('select', tabTitle);
         } else {
-            if (tabUrl){
-                content = '<iframe frameborder="0"  src="'+tabUrl+'" style="width:100%;height:99%;"></iframe>';
+            if (tabUrl) {
+                content = '<iframe frameborder="0"  src="' + tabUrl + '" style="width:100%;height:99%;"></iframe>';
             } else {
                 content = '未实现';
             }
