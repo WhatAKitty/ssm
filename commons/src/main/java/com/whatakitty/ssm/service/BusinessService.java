@@ -2,6 +2,7 @@ package com.whatakitty.ssm.service;
 
 import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 
+import com.alibaba.fastjson.JSON;
 import com.whatakitty.ssm.asserts.Asserts;
 import com.whatakitty.ssm.db.MyMapper;
 import com.whatakitty.ssm.db.mybatis.BaseEntity;
@@ -344,6 +345,7 @@ public abstract class BusinessService<T extends IdEntity, D> extends BaseService
         T old = byPrimaryKey(id, force);
         Asserts.isTrue(old != null, 400, String.format("不存在编号为%s的记录", id));
 
+        // TODO 更新的时候，如果出现为空的字段需要强制更新会出现无法更新该字段的情况
         ignoreProperties = ArrayUtils.add(ignoreProperties, "id");
         BeanUtils.copyNoneNullProperties(d, old, ignoreProperties);
 
@@ -397,6 +399,38 @@ public abstract class BusinessService<T extends IdEntity, D> extends BaseService
 
         Asserts.isTrue(result == 1, 500, String.format("删除编号为%s的记录失败", id));
         return t;
+    }
+
+    /**
+     * 根据条件删除记录
+     *
+     * <p>
+     * <b>目标记录是否可以软删除：</b>
+     * <ul>
+     * <li>可以软删除，并且未标记硬删除，则更新软删除字段</li>
+     * <li>可以软删除，并且标记硬删除，则直接删除目标记录</li>
+     * <li>不可以软删除，不论是否标记硬删除，直接删除目标记录</li>
+     * </ul>
+     * </p>
+     *
+     * @param force 是否包含被软删除的记录
+     * @return 删除响应
+     */
+    public void destroy(Example example, boolean force) {
+        T t = newInstance();
+
+        int result;
+        // 存在软删除标记并且未标记硬删除
+        if (t instanceof SDelEntity && !force) {
+            // 存在软删除标记
+            ((SDelEntity) t).setIsDel(true);
+            result = updateNotNullByExample(t, example, new Date());
+        } else {
+            // 对目标记录硬删除
+            result = deleteByExample(example);
+        }
+
+        Asserts.isTrue(result > 0, 500, String.format("根据条件 %s 删除记录失败", JSON.toJSONString(example)));
     }
 
     private T newInstance() {

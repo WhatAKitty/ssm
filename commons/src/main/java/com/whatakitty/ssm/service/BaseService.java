@@ -8,6 +8,7 @@ import com.whatakitty.ssm.dto.Pageable;
 import java.util.Date;
 import java.util.List;
 import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.entity.Example;
 
 /**
  * 基础业务层
@@ -115,16 +116,6 @@ public abstract class BaseService<T, M extends Mapper<T>> {
     }
 
     /**
-     * 根据主键删除记录
-     *
-     * @param key 主键
-     * @return 删除的结果数
-     */
-    public int delete(Object key) {
-        return mapper.deleteByPrimaryKey(key);
-    }
-
-    /**
      * 根据主键更新传入的实体信息（包含所有字段更新，即使这个字段的值为null）
      *
      * @param entity 实体信息
@@ -150,6 +141,56 @@ public abstract class BaseService<T, M extends Mapper<T>> {
             ((BaseEntity) entity).setModifyDate(date);
         }
         return mapper.updateByPrimaryKeySelective(entity);
+    }
+
+    /**
+     * 根据条件更新传入的实体信息（包含所有字段更新，即使这个字段的值为null）
+     *
+     * @param entity  实体信息
+     * @param example 更新条件
+     * @param date    更新时间
+     * @return 更新的结果数量
+     */
+    public int updateAllByExample(T entity, Example example, Date date) {
+        if (entity instanceof BaseEntity) {
+            ((BaseEntity) entity).setModifyDate(date);
+        }
+        return mapper.updateByExample(entity, example);
+    }
+
+    /**
+     * 根据查询条件更新传入的实体（不包含为null的值）
+     *
+     * @param entity  实体信息
+     * @param example 更新条件
+     * @param date    更新时间
+     * @return 更新的结果数量
+     */
+    public int updateNotNullByExample(T entity, Example example, Date date) {
+        if (entity instanceof BaseEntity) {
+            ((BaseEntity) entity).setModifyDate(date);
+        }
+        return mapper.updateByExampleSelective(entity, example);
+    }
+
+    /**
+     * 根据主键删除记录
+     *
+     * @param key 主键
+     * @return 删除的结果数
+     */
+    public int delete(Object key) {
+        return mapper.deleteByPrimaryKey(key);
+    }
+
+    /**
+     * 根据条件删除记录
+     *
+     * @param example 删除条件
+     * @return 删除的结果数
+     */
+    public int deleteByExample(Example example) {
+        return mapper.deleteByExample(example);
     }
 
 }
