@@ -69,7 +69,6 @@
                     $more = $('#more'),
                     $text = $more.find('.l-btn-text'),
                     $icon = $more.find('.l-btn-icon.fa');
-                console.log($icon)
                 if ($all.hasClass("opened")) {
                     $all.removeClass("opened");
                     $text.text('展开');
